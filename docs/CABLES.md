@@ -119,25 +119,72 @@ Twelve of each housing, not six: every cable has one at each end.
 
 ### The 2×5 — the one part I could not verify
 
-The hub's `J1` and the breakout's `J3` are both **plain, unshrouded 2.00 mm
-dual-row pin headers on 0.5 mm square posts.** What you need is a 10-way
-(2×5) socket housing that fits those posts.
+**Both ends of this cable are the same interface, and that is deliberate.** The
+hub's `J1` and the breakout's `J3` are both plain, unshrouded 2×5 headers on a
+2.00 mm grid with 0.5 mm square posts — Cycfi's is the `2X5` package from their
+`headers(2mm)` Eagle library, the hub's is KiCad's
+`PinHeader_2x05_P2.00mm_Vertical`. The PCB hole sizes differ slightly, 0.75 mm
+against 0.80 mm, but that is the board, not the pin: the same commodity header
+strip fits both, and both number their pins in pairs across the rows, which is
+what lets the cable be wired one-to-one.
 
-I could not confirm a specific part for this from the manufacturers'
-documentation, and I am not going to pretend otherwise. Two routes, and
-**whichever you pick, buy one housing plus a few contacts first and test-fit
-it on the hub before ordering the rest**:
+Three consequences, and they are the whole reason to keep it that way:
+
+- **One test-fit qualifies both ends.** Whatever you prove on the hub is
+  equally true of the breakout, because it is the same part.
+- **Whichever housing wins is used at both ends.** One housing, one contact,
+  one crimp setting for the trunk, and the two ends are interchangeable.
+- **If the first choice fails, nothing is stranded** except the sample. Swap
+  routes and you are still symmetric.
+
+It is tempting to fix this by fitting a keyed, shrouded connector at the hub —
+a Hirose `DF11-10DP-2DSA` in place of the plain header. Don't. It buys
+certainty about the end that was never in doubt, still leaves the breakout end
+to be tested, and pays for it by making the cable asymmetric and committing
+the hub to one connector family for good. The retention it adds is
+half a fix that a cable tie does properly at both ends for nothing.
+
+What you need, then, is a 10-way (2×5) socket housing that fits bare 0.5 mm
+square posts. **I could not confirm a specific part for this from the
+manufacturers' documentation, and I am not going to pretend otherwise.** Two
+routes, and whichever you pick, **buy one housing and a few contacts first and
+test-fit them on the hub** — that sample decides the whole trunk, so it is
+worth having in your hand before the rest of the order goes in. Test on the
+hub rather than the breakout: same interface, and you are not levering an
+unproven connector onto Cycfi's board.
 
 | Route | Parts | Trade-off |
 | --- | --- | --- |
-| **Hirose DF11** | [DF11-10DS-2C](https://www.futureelectronics.com/p/interconnect--pin-and-socket-connectors--socket-plug-wire-mount/df11-10ds-2c-hirose-electric-4329116) housing + [DF11-2428SCA](https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/df11-2428sca/150215) contacts, 24–28 AWG gold | The proper 2.00 mm dual-row crimp system, with retention. Nominally intended for Hirose's own DF11 headers, which are shrouded — the socket should push onto a bare header, but **this is the thing to test-fit.** Different contact from the capsule cables, so a second crimp setting. |
-| **Generic 2.00 mm "Dupont"** | 2×5 10-way 2.0 mm socket housing + 2.0 mm crimp terminals | Explicitly made for plain square-post headers, so fit is not in question. Cycfi's own guide calls these "2 mm Dupont" parts. Variable quality; buy from a supplier you have used before. |
+| **Hirose DF11** | [DF11-10DS-2C](https://www.futureelectronics.com/p/interconnect--pin-and-socket-connectors--socket-plug-wire-mount/df11-10ds-2c-hirose-electric-4329116) housing + [DF11-2428SCA](https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/df11-2428sca/150215) contacts, 24–28 AWG gold | Better made, and there is real precedent: Cycfi's own guide puts Hirose **A4B** housings on the capsule's H1/H2, which are *generic* 2 mm headers — so a Hirose 2 mm socket is known to mate with a bare 2 mm post. Against it: that precedent is single-row, where A4B has no shroud in the first place. DF11's socket is designed against Hirose's own shrouded header, and I never found the post cross-section that decides it. Different contact from the capsule cables, so a second crimp setting. |
+| **Generic 2.00 mm "Dupont"** | 2×5 10-way 2.0 mm socket housing + 2.0 mm crimp terminals | Explicitly made for bare square-post headers, so fit is correct *by design* rather than by luck — this is the technically conservative choice, not the cheap one. Cycfi's own guide calls these "2 mm Dupont" parts. Variable quality; buy from a supplier you have used before. |
 
 A third possibility if you want **one contact type for the entire build**: two
 `A4B-5S-2C` five-way housings side by side. The A4B housing body is 2.0 mm
 wide and the row pitch is 2.0 mm, so two of them abutted should land on both
 rows, and you would use A3B-2630SCC throughout. I have not tested this and the
 housings would need bonding together — treat it as an experiment, not a plan.
+
+#### Qualifying the sample
+
+Ten minutes, and it settles the whole trunk. Two of these failure modes pass a
+plain continuity check, which is why the wiggle and the re-insertion count
+matter more than the beep.
+
+1. Push the **bare housing, no contacts** onto `J1`. It should seat fully and
+   square without forcing.
+2. Crimp one contact, insert it, check continuity — then **press the cable
+   sideways.** Intermittence here is the answer on its own.
+3. Mate and unmate **ten times**, then check retention again. If it has gone
+   slack, the contact beams are taking a permanent set: the connector works on
+   the bench and degrades in the instrument.
+4. Pull that contact back out and look at the beams under magnification.
+   Splayed or flattened is a fail.
+5. Confirm the moulded position-1 triangle lands on the pin you expect. A
+   female housing seen from its mating face numbers the *mirror* of the male
+   header seen from above, and this is where people get it backwards.
+
+If it passes but retention feels marginal, that is a cable tie or a dab of
+hot-melt at each end, not a different connector.
 
 ### Wire
 

@@ -88,9 +88,16 @@ wire for E1.
 ### Cable
 
 Everything on the board mates with **2.00 mm female crimp housings** on
-0.50 mm square posts. Pick one connector family and stay inside it; Harwin's
-M20/M22 range and Molex's Milli-Grid both cover 2.00 mm in single and dual
-row, which means one crimp terminal and one tool for the whole loom.
+0.50 mm square posts. [`docs/CABLES.md`](../docs/CABLES.md) has the part
+numbers, suppliers and a position table for every cable; what follows is just
+the shape of the job.
+
+Do not expect one crimp terminal to cover the whole loom. The twelve
+single-row cables use Hirose's A4B/A3B system, the same parts Cycfi specify
+for the capsules — but 2.00 mm *dual-row* is a fragmented standard and the
+2×5 needs its own housing and contact. The hub's `J1` and the breakout's `J3`
+are deliberately the same interface, so whichever housing you settle on is
+used at both ends of that cable.
 
 | Cable | Housings | Positions each |
 | --- | --- | --- |
