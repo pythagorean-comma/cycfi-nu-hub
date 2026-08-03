@@ -297,6 +297,97 @@ def board_figures(board):
     }
 
 
+def check_mechanical(board, interface):
+    """The mechanical interface file must still describe the built board.
+
+    This file is the whole reason the enclosure can live in a separate
+    repository: it carries the outline, the hole centres and every part
+    position across the boundary as data. If it drifts, an enclosure is
+    modelled to a board that no longer exists, and nothing finds out until
+    a printed part will not accept a PCB.
+
+    Positions are re-derived from the .kicad_pcb here rather than trusted,
+    because gen_pcb.py writes both files and a single wrong assumption would
+    otherwise agree with itself.
+    """
+    try:
+        stated = json.loads(interface.read_text())
+    except (OSError, ValueError) as error:
+        return [f"cannot read {interface.name}: {error} -- the enclosure has "
+                f"nothing to build against"]
+
+    problems = []
+    tree = sexp.parse(board.read_text())
+    figures = board_figures(board)
+
+    if stated.get("schema") != "cycfi-nu-hub/mechanical":
+        problems.append(f"{interface.name}: not a mechanical interface file")
+        return problems
+
+    # -- the outline and the stackup ------------------------------------
+    outline = stated.get("board", {})
+    for key, actual in (("width", figures["width"]),
+                        ("height", figures["height"])):
+        if round(float(outline.get(key, -1)), 1) != actual:
+            problems.append(f"{interface.name}: board {key} says "
+                            f"{outline.get(key)}, the board is {actual}")
+    general = sexp.find(tree, "general")
+    thickness = sexp.find(general, "thickness") if general else None
+    if thickness is not None and float(thickness[1]) != outline.get("thickness"):
+        problems.append(f"{interface.name}: thickness says "
+                        f"{outline.get('thickness')}, the board says "
+                        f"{thickness[1]}")
+
+    # -- every placement, against the footprint it claims to describe ---
+    placed = read_board_footprints(board)
+    declared = {p["ref"]: p for p in stated.get("parts", [])}
+    declared.update({h["ref"]: h for h in stated.get("mounting_holes", [])})
+
+    for ref in sorted(set(placed) - set(declared)):
+        problems.append(f"{interface.name}: {ref} is on the board but not in "
+                        f"the interface -- the enclosure would not know it is "
+                        f"there")
+    for ref in sorted(set(declared) - set(placed)):
+        problems.append(f"{interface.name}: {ref} is in the interface but not "
+                        f"on the board")
+
+    for ref in sorted(set(placed) & set(declared)):
+        actual = placed[ref][2]
+        entry = declared[ref]
+        if actual is None:
+            continue
+        if (round(entry.get("x", -1), 3), round(entry.get("y", -1), 3)) != \
+                (round(actual[0], 3), round(actual[1], 3)):
+            problems.append(
+                f"{interface.name}: {ref} at ({entry.get('x')}, "
+                f"{entry.get('y')}), the board has it at {actual}")
+
+    # -- bodies must be sane: containing their own origin, inside the board
+    width, height = figures["width"], figures["height"]
+    for ref, entry in sorted(declared.items()):
+        box = entry.get("body")
+        if box is None:
+            continue
+        if not (box["x_min"] <= entry["x"] <= box["x_max"]
+                and box["y_min"] <= entry["y"] <= box["y_max"]):
+            problems.append(f"{interface.name}: {ref}'s body does not contain "
+                            f"its own origin")
+        if (box["x_min"] < 0 or box["y_min"] < 0
+                or box["x_max"] > width or box["y_max"] > height):
+            problems.append(f"{interface.name}: {ref}'s body {box} falls "
+                            f"outside the {width} x {height} outline")
+
+    # The axis convention is the one field a modeller cannot check by eye,
+    # and getting it wrong mirrors the enclosure. Refuse to ship it unstated.
+    axes = stated.get("axes", {})
+    if "to_y_up" not in axes or "SOUTH" not in axes.get("y", ""):
+        problems.append(f"{interface.name}: the y-axis convention is not "
+                        f"stated -- that is how an enclosure comes out "
+                        f"mirrored")
+
+    return problems
+
+
 def check_order_figures(board, order):
     """fab/ORDER.md must still be describing the board that was just built.
 
@@ -439,6 +530,8 @@ def main():
     problems += check_project_rules(
         here / circuit.PROJECT / f"{circuit.PROJECT}.kicad_pro")
     problems += check_order_figures(board, here / "fab" / "ORDER.md")
+    problems += check_mechanical(
+        board, here / "fab" / f"{circuit.PROJECT}-mechanical.json")
     if problems:
         print(f"{len(problems)} board problem(s):")
         for problem in problems[:20]:
@@ -456,6 +549,8 @@ def main():
           f"{figures['width']} x {figures['height']}mm, "
           f"{figures['layers']} layers, {figures['placements']} placements, "
           f"{figures['plated']} plated and {figures['unplated']} unplated holes")
+    print(f"mechanical interface matches: {figures['placements']} placements "
+          f"and 4 holes, in a stated axis convention")
     return 0
 
 

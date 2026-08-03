@@ -34,6 +34,7 @@ conventions -- and the assertions in check_placement() are what turn a wrong
 guess into a failed build rather than a shorted board.
 """
 
+import json
 import pathlib
 import sys
 
@@ -518,6 +519,113 @@ def designators(board):
         board.reference(ref, visible=False)
 
 
+def mechanical(board, rectangle):
+    """Describe the finished board for whatever has to be built around it.
+
+    The enclosure lives in its own repository, because it needs CadQuery and
+    this one deliberately needs nothing. That split is only safe if the
+    dimensions cross the boundary as data rather than as numbers copied out of
+    a PDF, so this writes the one file the enclosure consumes and verify.py
+    checks it back against the board.
+
+    Everything here is read off the placed footprints rather than off the
+    constants at the top of this file. The constants are what the board was
+    asked to be; this is what it came out as.
+    """
+    left, top, right, bottom = rectangle
+
+    def body(ref):
+        """Courtyard bounding box -- the space the part actually claims."""
+        box = board.footprints[ref].GetCourtyard(pcbnew.F_CrtYd).BBox()
+        if box.GetWidth() == 0:
+            return None
+        return {"x_min": round(to_mm(box.GetLeft()), 3),
+                "y_min": round(to_mm(box.GetTop()), 3),
+                "x_max": round(to_mm(box.GetRight()), 3),
+                "y_max": round(to_mm(box.GetBottom()), 3)}
+
+    def placement(ref, group, note):
+        footprint = board.footprints[ref]
+        position = footprint.GetPosition()
+        return {
+            "ref": ref,
+            "value": circuit.PARTS[ref].value,
+            "group": group,
+            "x": round(to_mm(position.x), 3),
+            "y": round(to_mm(position.y), 3),
+            "rotation": round(footprint.GetOrientationDegrees(), 1),
+            "footprint": circuit.PARTS[ref].footprint,
+            "body": body(ref),
+            "note": note,
+        }
+
+    parts = [placement("J1", "trunk",
+                       "2x5 to Internal Breakout J3; cable leaves the east end")]
+    for channel in range(1, circuit.CHANNELS + 1):
+        parts.append(placement(
+            f"S{channel}", "capsule_signal",
+            f"CH{channel} signal, {circuit.STRINGS[channel]}; "
+            f"cable leaves the north edge"))
+        parts.append(placement(
+            f"P{channel}", "capsule_power",
+            f"CH{channel} power, {circuit.STRINGS[channel]}; "
+            f"cable leaves the south edge"))
+    parts.append(placement("E1", "ground_pad",
+                           "solder pad for the trunk cable screen"))
+
+    holes = []
+    for ref in circuit.MOUNTING_HOLES:
+        position = board.footprints[ref].GetPosition()
+        holes.append({
+            "ref": ref,
+            "x": round(to_mm(position.x), 3),
+            "y": round(to_mm(position.y), 3),
+            "drill": 2.7,
+            "plated": False,
+            "screw": "M2.5",
+            "body": body(ref),
+        })
+
+    return {
+        "schema": "cycfi-nu-hub/mechanical",
+        "schema_version": 1,
+        "project": circuit.PROJECT,
+        "generated_by": "gen_pcb.py -- do not edit; regenerate with ./build.sh",
+        "units": "mm",
+        # The sign of y is the classic way an enclosure comes out mirrored,
+        # so it is stated rather than left to be inferred from the numbers.
+        "axes": {
+            "origin": "top-left corner of the board outline",
+            "x": "increases east; CH1 is at the west end, CH6 at the east",
+            "y": "increases SOUTH -- downward on the layout, KiCad's convention",
+            "z": "increases up, out of the component side",
+            "warning": "CAD tools normally put +Y up. Convert before modelling.",
+            "to_y_up": "y_up = board.height - y",
+        },
+        "board": {
+            "width": round(right - left, 3),
+            "height": round(bottom - top, 3),
+            "thickness": 1.6,
+            "shape": "rectangle",
+            "corner_radius": 0.0,
+            "copper_layers": 2,
+        },
+        "mounting_holes": holes,
+        "parts": parts,
+        "component_height": {
+            "known": False,
+            "reason": "Header bodies are in the footprints, but the mated "
+                      "crimp housing is not, and the 2x5 housing is not yet "
+                      "chosen. Measure the tallest mated stack before "
+                      "closing a lid over it.",
+            "measure": ["2x5 housing mated on J1",
+                        "3-way housing mated on P1-P6",
+                        "2-way housing mated on S1-S6",
+                        "solder joints proud of the underside"],
+        },
+    }
+
+
 def check_fits(board, rectangle):
     """Nothing may stick out of the outline.
 
@@ -565,7 +673,12 @@ def main():
     pcbnew.ZONE_FILLER(board.board).Fill(board.board.Zones())
     pcbnew.SaveBoard(str(destination), board.board)
 
+    interface = here / "fab" / f"{circuit.PROJECT}-mechanical.json"
+    interface.parent.mkdir(parents=True, exist_ok=True)
+    interface.write_text(json.dumps(mechanical(board, rectangle), indent=2) + "\n")
+
     print(f"wrote {destination}")
+    print(f"  and {interface.name} for the enclosure")
     print(f"  {len(board.footprints)} footprints, {vias} stitching vias, "
           f"{len(list(board.board.GetTracks()))} track/via items")
     print(f"  board {BOARD_W:.1f} x {BOARD_H:.1f} mm "

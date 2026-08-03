@@ -1,0 +1,317 @@
+{
+  "schema": "cycfi-nu-hub/mechanical",
+  "schema_version": 1,
+  "project": "cycfi-nu-hub",
+  "generated_by": "gen_pcb.py -- do not edit; regenerate with ./build.sh",
+  "units": "mm",
+  "axes": {
+    "origin": "top-left corner of the board outline",
+    "x": "increases east; CH1 is at the west end, CH6 at the east",
+    "y": "increases SOUTH -- downward on the layout, KiCad's convention",
+    "z": "increases up, out of the component side",
+    "warning": "CAD tools normally put +Y up. Convert before modelling.",
+    "to_y_up": "y_up = board.height - y"
+  },
+  "board": {
+    "width": 61.0,
+    "height": 24.0,
+    "thickness": 1.6,
+    "shape": "rectangle",
+    "corner_radius": 0.0,
+    "copper_layers": 2
+  },
+  "mounting_holes": [
+    {
+      "ref": "H1",
+      "x": 3.5,
+      "y": 3.5,
+      "drill": 2.7,
+      "plated": false,
+      "screw": "M2.5",
+      "body": {
+        "x_min": 0.507,
+        "y_min": 0.503,
+        "x_max": 6.495,
+        "y_max": 6.497
+      }
+    },
+    {
+      "ref": "H2",
+      "x": 3.5,
+      "y": 20.5,
+      "drill": 2.7,
+      "plated": false,
+      "screw": "M2.5",
+      "body": {
+        "x_min": 0.507,
+        "y_min": 17.503,
+        "x_max": 6.495,
+        "y_max": 23.497
+      }
+    },
+    {
+      "ref": "H3",
+      "x": 57.5,
+      "y": 3.5,
+      "drill": 2.7,
+      "plated": false,
+      "screw": "M2.5",
+      "body": {
+        "x_min": 54.507,
+        "y_min": 0.503,
+        "x_max": 60.495,
+        "y_max": 6.497
+      }
+    },
+    {
+      "ref": "H4",
+      "x": 57.5,
+      "y": 20.5,
+      "drill": 2.7,
+      "plated": false,
+      "screw": "M2.5",
+      "body": {
+        "x_min": 54.507,
+        "y_min": 17.503,
+        "x_max": 60.495,
+        "y_max": 23.497
+      }
+    }
+  ],
+  "parts": [
+    {
+      "ref": "J1",
+      "value": "TO BREAKOUT J3",
+      "group": "trunk",
+      "x": 51.0,
+      "y": 8.0,
+      "rotation": 0.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_2x05_P2.00mm_Vertical",
+      "body": {
+        "x_min": 49.455,
+        "y_min": 6.455,
+        "x_max": 54.545,
+        "y_max": 17.545
+      },
+      "note": "2x5 to Internal Breakout J3; cable leaves the east end"
+    },
+    {
+      "ref": "S1",
+      "value": "CH1 SIG",
+      "group": "capsule_signal",
+      "x": 9.0,
+      "y": 4.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical",
+      "body": {
+        "x_min": 7.455,
+        "y_min": 2.455,
+        "x_max": 12.545,
+        "y_max": 5.545
+      },
+      "note": "CH1 signal, low E (6th); cable leaves the north edge"
+    },
+    {
+      "ref": "P1",
+      "value": "CH1 PWR",
+      "group": "capsule_power",
+      "x": 8.0,
+      "y": 20.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical",
+      "body": {
+        "x_min": 6.455,
+        "y_min": 18.455,
+        "x_max": 13.545,
+        "y_max": 21.545
+      },
+      "note": "CH1 power, low E (6th); cable leaves the south edge"
+    },
+    {
+      "ref": "S2",
+      "value": "CH2 SIG",
+      "group": "capsule_signal",
+      "x": 16.0,
+      "y": 4.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical",
+      "body": {
+        "x_min": 14.455,
+        "y_min": 2.455,
+        "x_max": 19.545,
+        "y_max": 5.545
+      },
+      "note": "CH2 signal, A (5th); cable leaves the north edge"
+    },
+    {
+      "ref": "P2",
+      "value": "CH2 PWR",
+      "group": "capsule_power",
+      "x": 15.0,
+      "y": 20.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical",
+      "body": {
+        "x_min": 13.455,
+        "y_min": 18.455,
+        "x_max": 20.545,
+        "y_max": 21.545
+      },
+      "note": "CH2 power, A (5th); cable leaves the south edge"
+    },
+    {
+      "ref": "S3",
+      "value": "CH3 SIG",
+      "group": "capsule_signal",
+      "x": 23.0,
+      "y": 4.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical",
+      "body": {
+        "x_min": 21.455,
+        "y_min": 2.455,
+        "x_max": 26.545,
+        "y_max": 5.545
+      },
+      "note": "CH3 signal, D (4th); cable leaves the north edge"
+    },
+    {
+      "ref": "P3",
+      "value": "CH3 PWR",
+      "group": "capsule_power",
+      "x": 22.0,
+      "y": 20.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical",
+      "body": {
+        "x_min": 20.455,
+        "y_min": 18.455,
+        "x_max": 27.545,
+        "y_max": 21.545
+      },
+      "note": "CH3 power, D (4th); cable leaves the south edge"
+    },
+    {
+      "ref": "S4",
+      "value": "CH4 SIG",
+      "group": "capsule_signal",
+      "x": 30.0,
+      "y": 4.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical",
+      "body": {
+        "x_min": 28.455,
+        "y_min": 2.455,
+        "x_max": 33.545,
+        "y_max": 5.545
+      },
+      "note": "CH4 signal, G (3rd); cable leaves the north edge"
+    },
+    {
+      "ref": "P4",
+      "value": "CH4 PWR",
+      "group": "capsule_power",
+      "x": 29.0,
+      "y": 20.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical",
+      "body": {
+        "x_min": 27.455,
+        "y_min": 18.455,
+        "x_max": 34.545,
+        "y_max": 21.545
+      },
+      "note": "CH4 power, G (3rd); cable leaves the south edge"
+    },
+    {
+      "ref": "S5",
+      "value": "CH5 SIG",
+      "group": "capsule_signal",
+      "x": 37.0,
+      "y": 4.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical",
+      "body": {
+        "x_min": 35.455,
+        "y_min": 2.455,
+        "x_max": 40.545,
+        "y_max": 5.545
+      },
+      "note": "CH5 signal, B (2nd); cable leaves the north edge"
+    },
+    {
+      "ref": "P5",
+      "value": "CH5 PWR",
+      "group": "capsule_power",
+      "x": 36.0,
+      "y": 20.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical",
+      "body": {
+        "x_min": 34.455,
+        "y_min": 18.455,
+        "x_max": 41.545,
+        "y_max": 21.545
+      },
+      "note": "CH5 power, B (2nd); cable leaves the south edge"
+    },
+    {
+      "ref": "S6",
+      "value": "CH6 SIG",
+      "group": "capsule_signal",
+      "x": 44.0,
+      "y": 4.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical",
+      "body": {
+        "x_min": 42.455,
+        "y_min": 2.455,
+        "x_max": 47.545,
+        "y_max": 5.545
+      },
+      "note": "CH6 signal, high E (1st); cable leaves the north edge"
+    },
+    {
+      "ref": "P6",
+      "value": "CH6 PWR",
+      "group": "capsule_power",
+      "x": 43.0,
+      "y": 20.0,
+      "rotation": 90.0,
+      "footprint": "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical",
+      "body": {
+        "x_min": 41.455,
+        "y_min": 18.455,
+        "x_max": 48.545,
+        "y_max": 21.545
+      },
+      "note": "CH6 power, high E (1st); cable leaves the south edge"
+    },
+    {
+      "ref": "E1",
+      "value": "SHIELD/GND",
+      "group": "ground_pad",
+      "x": 3.5,
+      "y": 12.0,
+      "rotation": 0.0,
+      "footprint": "TestPoint:TestPoint_THTPad_2.0x2.0mm_Drill1.0mm",
+      "body": {
+        "x_min": 1.955,
+        "y_min": 10.455,
+        "x_max": 5.045,
+        "y_max": 13.545
+      },
+      "note": "solder pad for the trunk cable screen"
+    }
+  ],
+  "component_height": {
+    "known": false,
+    "reason": "Header bodies are in the footprints, but the mated crimp housing is not, and the 2x5 housing is not yet chosen. Measure the tallest mated stack before closing a lid over it.",
+    "measure": [
+      "2x5 housing mated on J1",
+      "3-way housing mated on P1-P6",
+      "2-way housing mated on S1-S6",
+      "solder joints proud of the underside"
+    ]
+  }
+}
