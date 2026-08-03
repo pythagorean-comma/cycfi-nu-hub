@@ -162,3 +162,34 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
+
+# ---------------------------------------------------------------------------
+# This project
+# ---------------------------------------------------------------------------
+#
+# `build/` is already ignored above: erc.rpt, drc.rpt and verify.net are pure
+# check output and say nothing a rerun would not.
+#
+# `fab/` and `cycfi-nu-hub/` are deliberately NOT ignored. fab/ORDER.md is a
+# *source* file -- it is written by hand and verify.py asserts the board's
+# figures against it -- so ignoring fab/ would drop the one document the
+# generators cannot regenerate. And tracking the built board and the
+# fabrication zip is what pins a deliverable to the commit it was ordered
+# from.
+
+# Per-user KiCad state: window layout, selected layer, last-used tool. Written
+# by pcbnew.SaveBoard() on every build, and part of nobody's design.
+cycfi-nu-hub/*.kicad_prl
+
+# KiCad's auto-backup zips, created when the project is opened in the GUI.
+cycfi-nu-hub/*-backups/
+fp-info-cache
+
+# The unzipped staging copy of the gerbers. build.sh deletes and rebuilds it
+# every run, and cycfi-nu-hub-pcbway.zip beside it holds byte-identical
+# content -- so tracking both means ~1100 lines of churn per build for a
+# second copy of the same thing. The zip is the deliverable; this is scratch.
+fab/pcbway/
+
+# JetBrains module file. Per-user editor state, not part of the design.
+*.iml

@@ -1,0 +1,14 @@
+Ref,Val,Package,PosX,PosY,Rot,Side
+"J1","TO BREAKOUT J3","PinHeader_2x05_P2.00mm_Vertical",51.000000,-8.000000,0.000000,top
+"P1","CH1 PWR","PinHeader_1x03_P2.00mm_Vertical",8.000000,-20.000000,90.000000,top
+"P2","CH2 PWR","PinHeader_1x03_P2.00mm_Vertical",15.000000,-20.000000,90.000000,top
+"P3","CH3 PWR","PinHeader_1x03_P2.00mm_Vertical",22.000000,-20.000000,90.000000,top
+"P4","CH4 PWR","PinHeader_1x03_P2.00mm_Vertical",29.000000,-20.000000,90.000000,top
+"P5","CH5 PWR","PinHeader_1x03_P2.00mm_Vertical",36.000000,-20.000000,90.000000,top
+"P6","CH6 PWR","PinHeader_1x03_P2.00mm_Vertical",43.000000,-20.000000,90.000000,top
+"S1","CH1 SIG","PinHeader_1x02_P2.00mm_Vertical",9.000000,-4.000000,90.000000,top
+"S2","CH2 SIG","PinHeader_1x02_P2.00mm_Vertical",16.000000,-4.000000,90.000000,top
+"S3","CH3 SIG","PinHeader_1x02_P2.00mm_Vertical",23.000000,-4.000000,90.000000,top
+"S4","CH4 SIG","PinHeader_1x02_P2.00mm_Vertical",30.000000,-4.000000,90.000000,top
+"S5","CH5 SIG","PinHeader_1x02_P2.00mm_Vertical",37.000000,-4.000000,90.000000,top
+"S6","CH6 SIG","PinHeader_1x02_P2.00mm_Vertical",44.000000,-4.000000,90.000000,top
