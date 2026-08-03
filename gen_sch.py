@@ -137,7 +137,7 @@ def grounding(sch):
     pad = place(sch, "E1", ox, oy)
     sch.wire(pad.pin(1), (ox, oy + 5.08))
     sch.power("power:GND", ox, oy + 5.08)
-    sch.text("Bridge earth or cavity foil. Optional -- see DESIGN.md.",
+    sch.text("Bridge earth or cavity foil. Optional -- see docs/DESIGN.md.",
              ox + 7.62, oy, size=1.4)
 
 

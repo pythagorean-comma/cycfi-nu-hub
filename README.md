@@ -59,9 +59,10 @@ Run `python3 kicad.py` to see what it found.
 
 | | |
 | --- | --- |
-| [`DESIGN.md`](DESIGN.md) | What the board does and why, what must not be got wrong when wiring it, how it came out, and what is still open. **Start here.** |
-| [`fab/ORDER.md`](fab/ORDER.md) | How to order it, including the four requirements that are invisible in the gerbers, and what to buy alongside it. |
-| [`docs/`](docs) | What Cycfi's own Eagle files say, at a recorded commit, and how to re-extract it. Records, not specifications — where they and `DESIGN.md` differ, `DESIGN.md` is right. |
+| [`docs/DESIGN.md`](docs/DESIGN.md) | What the board does and why, what must not be got wrong when wiring it, how it came out, and what is still open. **Start here.** |
+| [`docs/CABLES.md`](docs/CABLES.md) | How to make the thirteen cables: parts, suppliers, position-by-position tables, and the continuity checks to run before anything is powered. |
+| [`fab/ORDER.md`](fab/ORDER.md) | How to order it, including the four requirements that are invisible in the gerbers, and what to buy alongside it. It lives beside the gerbers rather than in `docs/` because `build.sh` copies it into the fabrication zip and `verify.py` checks the board against its figures. |
+| [`docs/cycfi-sources.md`](docs/cycfi-sources.md) | What Cycfi's own files say, at a recorded commit, and how to re-extract it. Records, not specifications — where they and `docs/DESIGN.md` differ, `docs/DESIGN.md` is right. |
 
 ## Status
 
@@ -74,6 +75,6 @@ and nothing measured, so every claim in this repository comes from Cycfi's
 sources and from the generators — not from a bench.
 
 Two things to settle before ordering, both in the last section of
-[`DESIGN.md`](DESIGN.md): Cycfi publish sources for breakout **v2.5** and this
+[`docs/DESIGN.md`](docs/DESIGN.md): Cycfi publish sources for breakout **v2.5** and this
 targets **v2.6**, which is three continuity readings on J3 to confirm; and the
 breakout's `PWR SELECT` jumper decides what voltage six capsules will see.

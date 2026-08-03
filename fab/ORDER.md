@@ -31,7 +31,7 @@ single-point pad at E1 exists to avoid. The drill file marks them NPTH. Some
 fabs merge PTH and NPTH by default; do not let this one.
 
 **2. Nothing is fitted.** This is a bare-board order. The board carries no
-components at all, by design — see `DESIGN.md`. The parts list below is for
+components at all, by design — see `docs/DESIGN.md`. The parts list below is for
 whoever builds the instrument, not for the fab.
 
 **3. Route to the outline, no panel tabs inside it.** It is a plain rectangle
@@ -103,5 +103,5 @@ again: the first few are practice.
 
 **The hub → breakout cable is wired straight through, position n to position
 n, with positions 1 and 2 left empty at both ends.** Nothing crosses in it.
-`DESIGN.md` has the pin table and explains why the two empty positions are
+`docs/DESIGN.md` has the pin table and explains why the two empty positions are
 also what makes a reversed cable harmless.

@@ -2147,7 +2147,7 @@
 		)
 		(uuid "485cec88-baaf-5da7-93cd-23a084c5bc8d")
 	)
-	(text "Bridge earth or cavity foil. Optional -- see DESIGN.md."
+	(text "Bridge earth or cavity foil. Optional -- see docs/DESIGN.md."
 		(at 53.34 215.9 0)
 		(effects
 			(font

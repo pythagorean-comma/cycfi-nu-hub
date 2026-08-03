@@ -1,12 +1,14 @@
 # What Cycfi's files actually say
 
-A record, not a specification. Where this and [`DESIGN.md`](../DESIGN.md)
+A record, not a specification. Where this and [`DESIGN.md`](DESIGN.md)
 differ, `DESIGN.md` is right — but nothing here should differ, because
 `design.py` asserts the pin maps below at import and the build fails if they
 drift.
 
-Everything was read out of Cycfi's own Eagle sources. Nothing was taken from
-their documentation, their forum, or a photograph of a board.
+The pin maps below were read out of Cycfi's own Eagle sources — not from their
+forum, not from a photograph of a board. The one exception is the v2.6.1
+cross-check, which comes from their published datasheet and is labelled as
+such.
 
 | | |
 | --- | --- |
@@ -18,10 +20,38 @@ their documentation, their forum, or a photograph of a board.
 | Licence | CC BY-NC 4.0 — their schematics, quoted here for interoperability |
 
 The breakout silkscreen in this commit reads **INTERNAL BREAKOUT V2.5**. The
-hub targets a v2.6 breakout. Nothing the hub touches — J3's pinout, the V+
-jumper, the capsule connectors — is known to have changed, but 2.5 is what
-these numbers were taken from, and that is worth saying plainly rather than
-implying 2.6 was checked. **See the open question at the end of `DESIGN.md`.**
+hub targets a v2.6 breakout, for which Cycfi have not published Eagle files —
+but they have published a datasheet, and it corroborates the pin map. See
+[v2.6.1, cross-checked](#v261-cross-checked) at the end.
+
+## v2.6.1, cross-checked
+
+Second source: **<https://www.cycfi.com/assets/Internal-Breakout-2.6.pdf>**,
+"Internal Breakout v2.6.1", 11 pages. Not schematics — a pinout datasheet. Its
+page 3 diagram labels the two rows of the Nu Multi Ch 1-8 connector:
+
+    Ch8  Ch6  Ch4  Ch2  Gnd
+    Ch7  Ch5  Ch3  Ch1  10v
+
+and the Ch 7-14 connector beside it:
+
+    Ch14 Ch12 Ch10 Ch8  Gnd
+    Ch13 Ch11 Ch9  Ch7  10v
+
+Read as column pairs, that is CH7/CH8, CH5/CH6, CH3/CH4, CH1/CH2, supply/GND
+— **identical to the v2.5 J3 table below**, including the CH7/CH8 overlap
+between the two connectors. The hub's pin map holds across the revision.
+
+Two differences worth recording:
+
+- The supply pin is labelled **10V** on 2.6.1, where the v2.5 schematic calls
+  the net `V+` and feeds it from the `PWR SELECT` jumper. Measure it rather
+  than assuming which.
+- The v2.6 board is physically redesigned — Cycfi list it as 27 × 38 mm
+  against the 50 × 35 mm outline in the Eagle files — so the connector's
+  orientation on the board is not carried over from what is drawn here.
+
+The rest of this document is the v2.5 Eagle extraction, unchanged.
 
 ## The capsule — `nu_capsule/nu_preamp.sch`
 

@@ -28,7 +28,7 @@ them, at opposite ends of its own PCB.
 
 Everything about the two mating connectors was read out of Cycfi's Eagle
 sources, at a recorded commit, and is transcribed in
-[`docs/cycfi-sources.md`](docs/cycfi-sources.md). The three facts the board
+[`cycfi-sources.md`](cycfi-sources.md). The three facts the board
 depends on:
 
 1. **The capsule has two connectors, not one.** A 3-pin 2.00 mm header for
@@ -226,17 +226,32 @@ rather than by eye.
 
 ## Still open
 
-**The breakout revision.** Cycfi's published sources are silkscreened
-*INTERNAL BREAKOUT V2.5* and this hub targets **v2.6**. Nothing the hub
-touches is known to have changed, and Cycfi have not published 2.6 sources —
-but it has not been *checked*, and it is one continuity test to settle. Before
-building the cable, meter J3 on the actual breakout: **pin 9 to V+, pin 10 to
-ground, pin 7 to channel 1.** If those three are right, the whole table is.
+**The breakout revision — mostly resolved.** Cycfi's published *sources* are
+silkscreened *INTERNAL BREAKOUT V2.5* and this hub targets **v2.6**. They have
+not published 2.6 Eagle files, but they do publish a
+[v2.6.1 datasheet](https://www.cycfi.com/assets/Internal-Breakout-2.6.pdf),
+and its "Nu Multi Inputs Ch 1-8" diagram gives the two rows as
 
-**Which rail the PWR SELECT jumper is on.** J14 on the breakout selects
-whether V+ is the unregulated input or the LP2985 output. The hub passes
-through whatever it is, so the board does not care — but the capsules do.
-Confirm the jumper is where you want it before six capsules see it.
+    Ch8  Ch6  Ch4  Ch2  Gnd
+    Ch7  Ch5  Ch3  Ch1  10v
+
+which pairs **exactly** as the v2.5 sources do — CH7/CH8, CH5/CH6, CH3/CH4,
+CH1/CH2, supply/ground. The pin map this board is built on survives the
+revision.
+
+What a printed pin map cannot tell you is which physical end of the connector
+is position 1, and the v2.6 board is a different shape from the v2.5 one
+(Cycfi list it as 27 × 38 mm against the 50 × 35 mm in the Eagle files), so
+the connector may well sit differently. That is still one meter reading to
+settle: **pin 9 to the supply rail, pin 10 to ground, pin 7 to channel 1.**
+[`CABLES.md`](CABLES.md) has it as a numbered step.
+
+**What voltage the capsules will see.** On v2.5 the Nu Multi input's supply
+pin is a net called V+, fed from `J14`, a jumper silkscreened `PWR SELECT`
+that chooses between the unregulated input and the LP2985 output. On v2.6.1
+the same pin is labelled simply **10V**. The hub passes through whatever it
+is, so the board does not care — but six capsules do. Measure it at the hub
+with no capsules connected before fitting any.
 
 **Nothing has been fabricated yet.** No board has been made, no cable crimped
 and nothing measured. Every claim here is from the sources and the generators.
