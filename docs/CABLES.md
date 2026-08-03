@@ -282,7 +282,7 @@ a mistake, and it is why the hub places CH1 furthest from its own connector.
 **The shield does not go in the housing.** Solder it to the hub's `E1` pad and
 leave it unconnected at the breakout end. Grounding a screen at one end only
 is what stops it becoming a second ground path in parallel with position 10.
-`E1` is the 2.0 mm square pad on the west edge, silkscreened BRIDGE / SHIELD;
+`E1` is the 2.0 mm square pad on the west edge, silkscreened SHIELD / GND;
 it is on GND and it will take the shield tail and a cavity-foil wire together.
 
 ---

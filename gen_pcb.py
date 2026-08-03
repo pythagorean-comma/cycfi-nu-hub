@@ -485,8 +485,11 @@ def silkscreen(board):
 
     # E1's legend goes above the pad: below it is where the cable legend
     # starts, and the two collided.
-    board.text("BRIDGE", PAD_XY[0], PAD_XY[1] - 3.8, size=0.8)
-    board.text("SHIELD", PAD_XY[0], PAD_XY[1] - 2.6, size=0.8)
+    # Not "BRIDGE": the pad's designed job is the trunk cable's screen drain,
+    # and a bridge earth is a builder's choice with a weak case on an
+    # all-active instrument. Silk that names the optional use first invites it.
+    board.text("SHIELD", PAD_XY[0], PAD_XY[1] - 3.8, size=0.8)
+    board.text("GND", PAD_XY[0], PAD_XY[1] - 2.6, size=0.8)
 
 
 def designators(board):

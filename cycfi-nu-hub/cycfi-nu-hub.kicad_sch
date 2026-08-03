@@ -2147,7 +2147,7 @@
 		)
 		(uuid "485cec88-baaf-5da7-93cd-23a084c5bc8d")
 	)
-	(text "Bridge earth or cavity foil. Optional -- see docs/DESIGN.md."
+	(text "Trunk cable screen; cavity foil. See docs/DESIGN.md."
 		(at 53.34 215.9 0)
 		(effects
 			(font
@@ -2155,7 +2155,7 @@
 			)
 			(justify left)
 		)
-		(uuid "3996d92f-17bd-5d5c-878a-b35cb1d5ecc5")
+		(uuid "894170a1-a90f-5189-b502-9ca88e29c507")
 	)
 	(text "M2.5 clearance, unplated -- not on GND"
 		(at 151.13 250.19 0)
@@ -4111,7 +4111,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "BRIDGE/SHIELD"
+		(property "Value" "SHIELD/GND"
 			(at 45.72 222.25 0)
 			(effects
 				(font
@@ -4138,7 +4138,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Solder pad to GND for bridge earth or cavity shielding, 1.0mm hole"
+		(property "Description" "Solder pad to GND: trunk cable screen, cavity foil, optionally bridge earth"
 			(at 45.72 215.9 0)
 			(effects
 				(font

@@ -147,15 +147,42 @@ op-amp output that is worth little — but it is worth nothing against it
 either, and it costs the same to fabricate. Six stitching vias tie the pours
 together, on top of the nineteen through-hole GND pads that already do.
 
-**E1** is a 2.0 × 2.0 mm pad on a 1.0 mm hole, on GND, for a bridge earth or a
-cavity-shielding tail. It is optional. Fitting the pad does not commit you to
-using it, and in an all-active instrument some builders deliberately leave the
-bridge floating — that is the path that puts the player at mains potential if
-something upstream fails. Use it for foil and decide about the bridge
-separately.
+### E1
 
-The objection to landing bridge earth here is that it makes the hub the ground
-meeting point, so string-borne hum shares the single GND wire in the cable
+A 2.0 × 2.0 mm pad on a 1.0 mm hole, on GND, silkscreened SHIELD / GND.
+
+**It is not a circuit feature.** GND is already poured across both layers, so
+E1 adds no connection — it is simply the one place where the mask is open and
+the pad is big enough to solder a wire to. That is its whole point: without
+it, somebody eventually abrades the pour or hangs a tail off an occupied
+connector pin. It costs one hole and no board area, since the west margin it
+sits in is set by the mounting holes and would be empty anyway.
+
+It has three jobs, and only the first is designed in.
+
+**The trunk cable's screen.** [`CABLES.md`](CABLES.md) specifies screened cable
+for the hub → breakout run with the screen grounded **at one end only**, so it
+cannot become a second ground path in parallel with the GND conductor in
+position 10. E1 is that end. Use screened cable and the pad stops being
+optional — there is nowhere else for the drain to go.
+
+**Cavity foil.** Shielding does nothing unless it is tied to circuit ground,
+and left floating it can couple slightly worse than none. But foil carries
+only displacement currents, so it can be grounded anywhere on the system —
+the hub is convenient, not required.
+
+**A bridge earth, distantly.** Weaker here than the convention suggests. The
+mechanism it defends against — the player's body coupling mains hum into a
+high-impedance circuit — is largely handled already by every Nu output being
+an op-amp behind a 10 µF capacitor into low-impedance cabling. Against that,
+it is the connection that puts the player at circuit ground through the
+strings, which in an upstream fault is a path toward mains potential, and it
+conventionally belongs at the system's main ground point rather than on a leaf
+board at the far end of a cable. Fitting the pad does not commit you to using
+it for this, and the silkscreen deliberately does not say BRIDGE.
+
+One objection that does *not* stand up: that landing a tail here makes the hub
+a ground meeting point, so its return shares the single GND wire in the cable
 with six signal returns. At microamps through tens of milliohms that is
 nanovolts. It is not a real mechanism at these levels.
 

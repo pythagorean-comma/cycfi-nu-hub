@@ -141,8 +141,8 @@ LIBS = {
 FP_2X5 = "Connector_PinHeader_2.00mm:PinHeader_2x05_P2.00mm_Vertical"
 FP_1X03 = "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical"
 FP_1X02 = "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
-# 2.0 x 2.0 mm pad on a 1.0 mm hole: big enough to take a bridge earth or a
-# shielding-foil tail in stripped wire up to about 18 AWG.
+# 2.0 x 2.0 mm pad on a 1.0 mm hole: big enough to take a cable screen, a
+# shielding-foil tail or a bridge earth in stripped wire up to about 18 AWG.
 FP_PAD = "TestPoint:TestPoint_THTPad_2.0x2.0mm_Drill1.0mm"
 FP_HOLE = "MountingHole:MountingHole_2.7mm_M2.5"
 
@@ -334,15 +334,22 @@ def capsule(design, index):
 
 
 def grounding(design):
-    """One pad for the bridge earth or the cavity foil.
+    """One pad to land a ground tail on.
 
-    Costs nothing and saves a tag strip. Whether the bridge goes on it is the
-    builder's call: in an all-active instrument some deliberately leave the
-    bridge floating, and fitting the pad does not commit anyone to using it.
+    Not a circuit feature -- GND is already poured across both layers. This is
+    simply the one place the mask is open and the pad is big enough to solder
+    a wire to, which is what stops somebody abrading the pour instead.
+
+    Its designed job is the trunk cable's screen: docs/CABLES.md grounds that
+    screen at one end only, and this is that end. Cavity foil is the second
+    use and could equally go anywhere on the system ground. A bridge earth is
+    a distant third -- the mechanism it defends against is largely handled by
+    the capsules already being active and low-impedance, and it conventionally
+    belongs at the system's main ground point rather than on a leaf board.
     """
-    design.add(Part("E1", "BRIDGE/SHIELD", "Connector:TestPoint", FP_PAD,
-                    description="Solder pad to GND for bridge earth or "
-                                "cavity shielding, 1.0mm hole"))
+    design.add(Part("E1", "SHIELD/GND", "Connector:TestPoint", FP_PAD,
+                    description="Solder pad to GND: trunk cable screen, "
+                                "cavity foil, optionally bridge earth"))
     design.connect("GND", ("E1", 1))
 
 
