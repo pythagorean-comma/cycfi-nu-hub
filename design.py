@@ -144,7 +144,9 @@ FP_1X02 = "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
 # 2.0 x 2.0 mm pad on a 1.0 mm hole: big enough to take a cable screen, a
 # shielding-foil tail or a bridge earth in stripped wire up to about 18 AWG.
 FP_PAD = "TestPoint:TestPoint_THTPad_2.0x2.0mm_Drill1.0mm"
-FP_HOLE = "MountingHole:MountingHole_2.7mm_M2.5"
+# M2, not M2.5, and 2.2 mm rather than 2.7: the hole pattern is Cycfi's, taken
+# off internal_breakout.brd -- see MOUNTING_PATTERN.
+FP_HOLE = "MountingHole:MountingHole_2.2mm_M2"
 
 # Pins deliberately left unconnected. verify.py treats every other floating
 # pin as an error, so this is where an intentional one is declared -- next to
@@ -186,6 +188,39 @@ COMPONENT_FREE_LIBS = frozenset({
 })
 
 MOUNTING_HOLES = ("H1", "H2", "H3", "H4")
+
+# The board's outline and hole pattern are the Internal Breakout's, so one
+# mount, one cavity and one enclosure pocket take either board. Measured off
+# Cycfi's own internal_breakout.brd -- layer 20, the Eagle dimension layer --
+# rather than read off a drawing:
+#
+#     outline    50.0 x 35.0 mm, corners rounded
+#     holes      4 x 2.2 mm at 45.0 x 30.0 mm centres, 2.5 mm in from each edge
+#
+# Two things about that are approximations rather than transcriptions, and both
+# are deliberate.
+#
+# Cycfi's four hole centres are not quite a rectangle -- the left pair are
+# 29.9 mm apart and the right pair 30.0, and the four insets run 2.52 to 2.55.
+# That is Eagle rounding, not intent, so this board uses the clean symmetric
+# pattern every one of their holes is within 0.06 mm of. On a 2.2 mm hole
+# taking an M2 screw that is a fifth of the clearance the screw already has.
+#
+# Their four corner arcs do not share a radius either: three work out at about
+# 1.77 mm and one at 1.63. BOARD_R in gen_pcb.py is a true fillet at 1.75.
+#
+# THIS IS THE v2.5 OUTLINE. It is the only breakout geometry Cycfi have
+# published in any form -- the v2.6.1 datasheet is a pinout document and
+# carries no dimensions at all, and the 2023 redesign announcement carries
+# none either. See docs/cycfi-sources.md.
+MOUNTING_PATTERN = {
+    "source": "cycfi/nu internal_breakout/internal_breakout.brd, Eagle layer 20",
+    "outline": (50.0, 35.0),
+    "hole_drill": 2.2,
+    "hole_screw": "M2",
+    "hole_centres": (45.0, 30.0),
+    "hole_inset": 2.5,
+}
 
 
 class Part:
@@ -354,7 +389,12 @@ def grounding(design):
 
 
 def mounting(design):
-    """Four M2.5 clearance holes, one per corner.
+    """Four M2 clearance holes on the Internal Breakout's own pattern.
+
+    The size and the spacing are not this board's to choose: they are Cycfi's,
+    so that a mount or an enclosure pocket made for a breakout takes a hub
+    too. See MOUNTING_PATTERN for where the numbers come from and what in them
+    is measured rather than assumed.
 
     Not on the ground net. A hub screwed to a cavity floor has no defined
     chassis to bond to, and a plated, grounded hole would make the mounting
@@ -363,8 +403,8 @@ def mounting(design):
     which is exactly the loop the single-point pad at E1 exists to avoid.
     """
     for ref in MOUNTING_HOLES:
-        design.add(Part(ref, "M2.5", "Mechanical:MountingHole", FP_HOLE,
-                        description="M2.5 clearance hole, unplated"))
+        design.add(Part(ref, "M2", "Mechanical:MountingHole", FP_HOLE,
+                        description="M2 clearance hole, unplated"))
 
 
 def flags(design):

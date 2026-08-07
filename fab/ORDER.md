@@ -13,7 +13,7 @@ it. What follows is the handful of things the gerbers do not say.
 | | |
 | --- | --- |
 | **Layers** | **2**, 1 oz copper |
-| **Board size** | **61.0 × 24.0 mm**, rectangular |
+| **Board size** | **50.0 × 35.0 mm**, corners rounded to R1.75 |
 | Thickness | 1.6 mm |
 | Soldermask | any colour |
 | Silkscreen | white, top only — the bottom carries nothing |
@@ -22,7 +22,7 @@ it. What follows is the handful of things the gerbers do not say.
 
 ## The four things that are not in the gerbers
 
-**1. The four mounting holes must not be plated.** They are 2.70 mm M2.5
+**1. The four mounting holes must not be plated.** They are 2.20 mm M2
 clearance holes at the corners and they are deliberately off the ground net.
 A hub screwed into a shielded cavity with metal screws and *plated* holes
 would bond the audio ground to the cavity foil through the mounting hardware,
@@ -34,8 +34,12 @@ fabs merge PTH and NPTH by default; do not let this one.
 components at all, by design — see `docs/DESIGN.md`. The parts list below is for
 whoever builds the instrument, not for the fab.
 
-**3. Route to the outline, no panel tabs inside it.** It is a plain rectangle
-and there is copper 0.50 mm from every edge.
+**3. Route to the outline, no panel tabs inside it.** It is a rectangle with
+1.75 mm radius corners, and there is copper 0.50 mm from every edge — the
+pours follow the corner radii in, so a tab breaking into one takes copper with
+it. The outline and the hole pattern are the Cycfi Internal Breakout's, so
+they are not free to be approximated: a corner squared off to save a routing
+pass gives a board that measures right and will not drop into the pocket.
 
 **4. Both layers are poured.** The large ground areas on F.Cu and B.Cu are
 intentional and are not floods left over from routing.
@@ -43,7 +47,7 @@ intentional and are not floods left over from routing.
 ## Holes
 
 40 header holes at 0.80 mm, 1 pad hole at 1.00 mm and 6 vias at 0.40 mm, so
-47 plated holes in total. Plus 4 unplated holes at 2.70 mm for mounting.
+47 plated holes in total. Plus 4 unplated holes at 2.20 mm for mounting.
 
 **18 placements**, all through-hole, none of them fitted at the fab.
 
@@ -82,8 +86,9 @@ H1/H2 and the breakout's J3:
 A single 2.00 mm male header strip snapped to length covers all three; you
 need 40 pins of it plus the 2×5.
 
-Also 4 × M2.5 screws and standoffs, and — if you want it — a short length of
-wire for E1.
+Also 4 × M2 screws and standoffs, and — if you want it — a short length of
+wire for E1. M2 rather than M2.5 because the hole pattern is the Internal
+Breakout's, not this board's.
 
 ### Cable
 

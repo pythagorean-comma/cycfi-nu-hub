@@ -3,10 +3,18 @@
 Two layers. GND is poured on both and everything else is a handful of tracks,
 because there are only seven nets and no components to route between.
 
-The board is a strip. Six signal headers along the north edge, six power
-headers along the south edge, the 2x5 to the breakout at the east end, and the
-channels in string order from CH1 at the west. Reading it left to right reads
-the strings low to high, and the two cable bundles leave on opposite edges.
+The outline is not this board's to choose. It is the Internal Breakout's --
+50 x 35 mm with rounded corners and four M2 holes on 45 x 30 mm centres,
+measured off Cycfi's own internal_breakout.brd -- so that a mount, a cavity or
+an enclosure pocket cut for a breakout takes a hub as well. See
+circuit.MOUNTING_PATTERN for what in that is transcribed and what is rounded.
+
+Inside it the board is three bands. Six signal headers across the north, six
+power headers across the south, and between them the middle band carrying the
+2x5 to the breakout at its east end, the fan-in to it, the V+ bus and the
+grounding pad. Channels run in string order from CH1 at the west, so reading
+the board left to right reads the strings low to high, and the two capsule
+cable bundles still leave on opposite edges with the trunk leaving east.
 
 The one part of this that is not obvious is how the six channels reach the
 2x5, and it is forced by the connector's own geometry rather than chosen. Its
@@ -15,9 +23,9 @@ pads are 1.35 mm on a 2.00 mm pitch, so the clear gap between two of them is
 can be routed between the pads of a 2.00 mm header, which means the far row
 cannot be reached from the near side at all. So:
 
-    odd  pins 3/5/7 (CH5/CH3/CH1) are the near row, and are reached
+    odd  pins 3/5/7 (CH5/CH3/CH1) are the west row, and are reached
          directly from the west on F.Cu;
-    even pins 4/6/8 (CH6/CH4/CH2) are the far row, and go north of the
+    even pins 4/6/8 (CH6/CH4/CH2) are the east row, and go north of the
          signal headers on B.Cu, east past the connector, and come back
          into it from the outside.
 
@@ -27,6 +35,13 @@ pair and CH5/CH6 at its northern one, so a channel's target y falls as its
 number falls -- and with CH1 at the *west* end of the board, the westmost
 channel wants the southernmost lane. That nests. Mirror the board and every
 lane crosses every other one.
+
+The fan-in is the one thing the new outline did not change. What it did change
+is how little room there is to do it in: the strip's lanes ran through open
+copper along the north edge, and here the same band has the two north mounting
+holes sitting in it, 2.5 mm in from a rounded corner. The lanes clear those by
+going under them rather than around -- see check_holes_clear(), which is the
+only thing on the board that knows an unplated hole is there at all.
 
 Track waypoints are given relative to real pad positions read back from the
 placed footprints, so nothing here depends on guessing KiCad's rotation
@@ -60,48 +75,80 @@ KEEPOUT = rules.PAD_KEEPOUT
 F = pcbnew.F_Cu
 B = pcbnew.B_Cu
 
-# -- the strip ---------------------------------------------------------------
-BOARD_W = 61.0
-BOARD_H = 24.0
+# -- the outline, which is Cycfi's ------------------------------------------
+# Every number in this block comes from circuit.MOUNTING_PATTERN rather than
+# being written here, so there is one place the breakout's geometry is
+# recorded and one place it would have to change if a v2.6 board is ever
+# measured. BOARD_R is the only figure this file chooses: Cycfi's own four
+# corner arcs disagree with each other, so a true fillet is drawn at the
+# radius three of the four work out to.
+BOARD_W, BOARD_H = circuit.MOUNTING_PATTERN["outline"]
+BOARD_R = 1.75
 
-Y_SIGNAL = 4.0        # S1..S6 pad row, north edge
-Y_POWER = 20.0        # P1..P6 pad row, south edge
-CH_X0 = 10.0          # centre of the CH1 column
+_HOLE_INSET = circuit.MOUNTING_PATTERN["hole_inset"]
+HOLE_DRILL = circuit.MOUNTING_PATTERN["hole_drill"]
+
+# -- the three bands ---------------------------------------------------------
+Y_SIGNAL = 7.5        # S1..S6 pad row, clear of the north mounting holes
+Y_POWER = 27.5        # P1..P6 pad row, clear of the south ones
+CH_X0 = 7.5           # centre of the CH1 column
 CH_PITCH = 7.0        # 6.2 mm is the widest 3-way 2.00 mm housing, so this
                       # leaves 0.8 mm between two of them side by side
 
-# J1's pin 1. The footprint steps +2 in x to the even row and +2 in y to the
+# Six columns on a 7 mm pitch put 35 mm between CH1's centre and CH6's, and a
+# 1x03's courtyard adds 3.5 mm at each end. 42 mm of the 50 available, centred,
+# which is what fixes CH_X0 -- there is no slack in it to move them east.
+assert CH_X0 - 3.5 == BOARD_W - (CH_X0 + 5 * CH_PITCH + 3.5), (
+    "the channel columns are no longer centred on the board")
+
+# J1's pin 1. The footprint steps +2 in x to the east row and +2 in y to the
 # next pair, so this one corner fixes all ten pads.
 #
-# Not hard against the east edge, and the gap east of it is not slack: the
-# three descents to the far row live in it, and beyond them the two eastern
-# mounting holes, whose courtyards are 6 mm across because they have to clear
-# a screw head. That is what sets BOARD_W.
-J1_PIN1 = (51.0, 8.0)
+# It sits at the east end of the middle band rather than against the east edge,
+# and the 3.5 mm beyond its courtyard is not slack: the three descents to the
+# east row live in it. Its y is what leaves a clear band between the signal
+# row and the top of the connector for the lanes to cross in.
+J1_PIN1 = (43.0, 13.0)
 
 # -- lanes -------------------------------------------------------------------
 # The even channels' route north of the signal headers, outermost first: CH2
-# starts furthest west so it takes the lane nearest the board edge, and comes
+# starts furthest west so it takes the lane nearest the north edge, and comes
 # back down the east side furthest out. Nesting in both axes at once is what
 # keeps the three of them from crossing.
-NORTH_LANES = {2: 1.4, 4: 2.0, 6: 2.6}
-EAST_LANES = {2: 55.4, 4: 54.8, 6: 54.2}
+#
+# North of the signal row and not south of it, and that is not a free choice.
+# Each lane is reached by a drop out of its own header, and each descent
+# begins at its own lane -- so the outermost lane has to be the one furthest
+# from the header row *and* clear of every descent. Those are the same
+# direction only on the side the descents run away from. Put the lanes in the
+# equally roomy band south of the row and CH2's lane crosses CH4's descent;
+# DRC catches it, but the geometry is what decides it.
+EASTBOUND_Y = {2: 4.6, 4: 5.2, 6: 5.8}
+DESCENT_X = {2: 48.0, 4: 47.2, 6: 46.4}
 
 # The odd channels need no lane of their own: each drops from its header
 # straight to the y of the pad it is going to, and runs east along it.
 
-VPLUS_Y = 18.0        # the V+ bus, between J1's bottom pair and the power row
+VPLUS_Y = 24.0        # the V+ bus, between J1's bottom pair and the power row
 
 # Stitching vias, in the empty band between the CH1 lane and the V+ bus. GND
 # is already stitched at every header -- nineteen through-hole pads on it --
 # so these are belt and braces on a board where they cost nothing.
-STITCH_Y = 16.5
-STITCH_X = (12.0, 19.0, 26.0, 33.0, 40.0, 47.0)
+STITCH_Y = 22.0
+STITCH_X = (7.0, 13.0, 19.0, 25.0, 31.0, 37.0)
 
 # -- fixed placements --------------------------------------------------------
-PAD_XY = (3.5, 12.0)          # E1, the bridge/shield pad, on the west margin
-HOLE_XY = {"H1": (3.5, 3.5), "H2": (3.5, 20.5),
-           "H3": (57.5, 3.5), "H4": (57.5, 20.5)}
+PAD_XY = (3.0, 17.0)          # E1, the shield/ground pad, on the west margin
+HOLE_XY = {
+    "H1": (_HOLE_INSET, _HOLE_INSET),
+    "H2": (_HOLE_INSET, BOARD_H - _HOLE_INSET),
+    "H3": (BOARD_W - _HOLE_INSET, _HOLE_INSET),
+    "H4": (BOARD_W - _HOLE_INSET, BOARD_H - _HOLE_INSET),
+}
+assert (HOLE_XY["H3"][0] - HOLE_XY["H1"][0],
+        HOLE_XY["H2"][1] - HOLE_XY["H1"][1]) \
+    == circuit.MOUNTING_PATTERN["hole_centres"], (
+        "the mounting holes no longer sit on the breakout's centres")
 
 # Headers are placed rotated so their pins run along the board rather than
 # across it. +90 puts pin 1 westmost; check_placement() asserts it did.
@@ -110,6 +157,61 @@ ROW_ROTATION = 90
 
 def to_mm(value):
     return pcbnew.ToMM(value)
+
+
+# ---------------------------------------------------------------------------
+# rounded rectangle
+# ---------------------------------------------------------------------------
+#
+# Three views of the same shape, because three things consume it and none of
+# them take the same form: Edge_Cuts wants segments and true arcs, a zone
+# wants a closed polygon, and check_fits() wants to know whether a point is
+# inside. Deriving all three from one (rectangle, radius) is what stops the
+# pours and the outline drifting apart at the corners -- which they would do
+# silently, as a sliver of copper hanging over a rounded edge.
+
+def rounded_rectangle_segments(rectangle, radius):
+    """The four straight edges, each stopping short of its corners."""
+    left, top, right, bottom = rectangle
+    r = radius
+    return [((left + r, top), (right - r, top)),
+            ((right, top + r), (right, bottom - r)),
+            ((right - r, bottom), (left + r, bottom)),
+            ((left, bottom - r), (left, top + r))]
+
+
+def rounded_rectangle_arcs(rectangle, radius):
+    """The four corners as (start, mid, end), clockwise on screen."""
+    left, top, right, bottom = rectangle
+    r = radius
+    # How far the arc's midpoint sits in from the corner of the bounding box.
+    k = r * (1 - 2 ** -0.5)
+    return [((left, top + r), (left + k, top + k), (left + r, top)),
+            ((right - r, top), (right - k, top + k), (right, top + r)),
+            ((right, bottom - r), (right - k, bottom - k), (right - r, bottom)),
+            ((left + r, bottom), (left + k, bottom - k), (left, bottom - r))]
+
+
+def rounded_rectangle_polygon(rectangle, radius, steps=8):
+    """The same outline as a closed polygon, for a zone.
+
+    y is down, so the angles run clockwise on screen: a corner centred at
+    (cx, cy) sweeping 180 to 270 degrees is the *top-left* one.
+    """
+    import math
+
+    left, top, right, bottom = rectangle
+    r = radius
+    corners = (((right - r, top + r), -90, 0),
+               ((right - r, bottom - r), 0, 90),
+               ((left + r, bottom - r), 90, 180),
+               ((left + r, top + r), 180, 270))
+    points = []
+    for (cx, cy), start, end in corners:
+        for step in range(steps + 1):
+            angle = math.radians(start + (end - start) * step / steps)
+            points.append((cx + r * math.cos(angle), cy + r * math.sin(angle)))
+    return points
 
 
 def point(x, y):
@@ -206,8 +308,7 @@ class Board:
         item.SetNet(self.net(net))
         self.board.Add(item)
 
-    def zone(self, net, layer, rectangle, priority=0):
-        left, top, right, bottom = rectangle
+    def zone(self, net, layer, points, priority=0):
         item = pcbnew.ZONE(self.board)
         item.SetLayer(layer)
         item.SetNet(self.net(net))
@@ -216,20 +317,32 @@ class Board:
         item.SetMinThickness(pcbnew.FromMM(0.2))
         outline = item.Outline()
         outline.NewOutline()
-        for x, y in ((left, top), (right, top), (right, bottom), (left, bottom)):
+        for x, y in points:
             outline.Append(pcbnew.FromMM(float(x)), pcbnew.FromMM(float(y)))
         self.board.Add(item)
         return item
 
-    def outline(self, rectangle):
-        left, top, right, bottom = rectangle
-        corners = [(left, top), (right, top), (right, bottom), (left, bottom),
-                   (left, top)]
-        for start, end in zip(corners, corners[1:]):
+    def outline(self, rectangle, radius):
+        """Edge cuts: four segments and four corner arcs.
+
+        The corners are rounded because the breakout's are, and a square
+        corner is *more* material than a round one -- a square 50 x 35 does
+        not go where a rounded 50 x 35 goes. Matching the outline and then
+        leaving the corners sharp would give a board that measures right and
+        will not drop into the pocket.
+        """
+        for start, end in rounded_rectangle_segments(rectangle, radius):
             shape = pcbnew.PCB_SHAPE(self.board)
             shape.SetShape(pcbnew.SHAPE_T_SEGMENT)
             shape.SetStart(point(*start))
             shape.SetEnd(point(*end))
+            shape.SetLayer(pcbnew.Edge_Cuts)
+            shape.SetWidth(pcbnew.FromMM(0.1))
+            self.board.Add(shape)
+        for start, middle, end in rounded_rectangle_arcs(rectangle, radius):
+            shape = pcbnew.PCB_SHAPE(self.board)
+            shape.SetShape(pcbnew.SHAPE_T_ARC)
+            shape.SetArcGeometry(point(*start), point(*middle), point(*end))
             shape.SetLayer(pcbnew.Edge_Cuts)
             shape.SetWidth(pcbnew.FromMM(0.1))
             self.board.Add(shape)
@@ -324,18 +437,33 @@ def check_placement(board):
     # Every lane has to clear the pads it runs past. Checked against the same
     # rule DRC will apply, so a lane nudged into a pad fails here first, with
     # a message that says which lane.
-    for channel, y in NORTH_LANES.items():
+    #
+    # The eastbound lanes run in the band between the north edge and the
+    # signal pads. It is 2.2 mm of usable width for three lanes, because the
+    # two north mounting holes eat the top of it -- check_holes_clear() is
+    # what holds that end, since an unplated hole is invisible here.
+    for channel, y in EASTBOUND_Y.items():
         want(y >= rules.MIN_COPPER_EDGE_CLEARANCE + TRACK / 2,
-             f"CH{channel}'s north lane at y={y} is off the board edge")
+             f"CH{channel}'s eastbound lane at y={y} is off the board edge")
         want(Y_SIGNAL - y >= KEEPOUT,
-             f"CH{channel}'s north lane at y={y} is inside the signal pads")
-    for channel, x in EAST_LANES.items():
+             f"CH{channel}'s eastbound lane at y={y} is inside the signal pads")
+    for channel, x in DESCENT_X.items():
         want(x - (J1_PIN1[0] + 2.0) >= KEEPOUT,
-             f"CH{channel}'s east lane at x={x} is inside J1's far row")
+             f"CH{channel}'s descent at x={x} is inside J1's east row")
         want(BOARD_W - x >= rules.MIN_COPPER_EDGE_CLEARANCE + TRACK / 2,
-             f"CH{channel}'s east lane at x={x} is off the board edge")
-    want(min(EAST_LANES.values()) - max(NORTH_LANES.values()) > 0,
-         "the east lanes and north lanes are not separable")
+             f"CH{channel}'s descent at x={x} is off the board edge")
+    want(min(DESCENT_X.values()) - max(EASTBOUND_Y.values()) > 0,
+         "the descents and the eastbound lanes are not separable")
+
+    # The two nestings must run the same way round. A channel that takes an
+    # outer lane and an inner descent encloses nothing and crosses both its
+    # neighbours -- which is the mistake this layout made once already, when
+    # the lanes were tried in the band south of the signal row.
+    order = sorted(EASTBOUND_Y, key=lambda ch: EASTBOUND_Y[ch])
+    want(order == sorted(DESCENT_X, key=lambda ch: -DESCENT_X[ch]),
+         f"lane order {order} does not match descent order "
+         f"{sorted(DESCENT_X, key=lambda ch: -DESCENT_X[ch])}: the outermost "
+         f"lane must also take the outermost descent")
 
     if problems:
         raise SystemExit("placement is not what the routing assumes:\n  "
@@ -374,21 +502,22 @@ def route_far_row(board):
 
     Both nestings run the same direction: the channel that starts furthest
     west takes the lane nearest the north edge and the descent nearest the
-    east edge, so it encloses the other two rather than crossing them.
+    east edge, so it encloses the other two rather than crossing them. See
+    EASTBOUND_Y for why the band has to be the northern one.
     """
     for channel in (2, 4, 6):
         pin = next(p for p, net in circuit.BREAKOUT_J3.items()
                    if net == f"CH{channel}")
         source = board.pad(f"S{channel}", 1)
         target = board.pad("J1", pin)
-        lane_y = NORTH_LANES[channel]
-        lane_x = EAST_LANES[channel]
+        lane_y = EASTBOUND_Y[channel]
+        lane_x = DESCENT_X[channel]
         board.track(f"CH{channel}", [
             source,                      # header pin, through-hole: no via needed
             (source[0], lane_y),         # north, over the header row
             (lane_x, lane_y),            # east, above everything
             (lane_x, target[1]),         # south, outside the connector
-            target,                      # west, into the far row
+            target,                      # west, into the east row
         ], layer=B)
 
 
@@ -417,11 +546,56 @@ def stitch(board):
     return len(STITCH_X)
 
 
+def check_holes_clear(board):
+    """No track or via may run into a mounting hole.
+
+    This is new with the breakout's outline and it is not ceremony. On the
+    61 x 24 strip the holes sat 3.5 mm in from the ends, a long way from
+    anything; here they are 2.5 mm in from all four edges, which puts H3 and
+    H4 in the same east margin the three descents run down -- CH4's descent
+    passes 0.3 mm from H3's centre line, and misses it only because the two
+    never share a y.
+
+    Nothing else here would catch it. An unplated hole carries no pad and no
+    net, so it is on no net's keepout and in no netlist; check_placement()
+    runs before any copper exists; and check_fits() compares the hole's
+    courtyard against the board outline, which says nothing about what is
+    routed through it. A track laid straight across one would build, pass the
+    netlist comparison and arrive as a board with a screw hole through a
+    signal.
+    """
+    def distance_to_segment(px, py, ax, ay, bx, by):
+        dx, dy = bx - ax, by - ay
+        span = dx * dx + dy * dy
+        if span == 0:
+            return ((px - ax) ** 2 + (py - ay) ** 2) ** 0.5
+        t = max(0.0, min(1.0, ((px - ax) * dx + (py - ay) * dy) / span))
+        return ((px - ax - t * dx) ** 2 + (py - ay - t * dy) ** 2) ** 0.5
+
+    problems = []
+    for ref, (hx, hy) in HOLE_XY.items():
+        for item in board.board.GetTracks():
+            half = to_mm(item.GetWidth()) / 2
+            needed = HOLE_DRILL / 2 + rules.MIN_HOLE_CLEARANCE + half
+            start, end = item.GetStart(), item.GetEnd()
+            gap = distance_to_segment(hx, hy,
+                                      to_mm(start.x), to_mm(start.y),
+                                      to_mm(end.x), to_mm(end.y))
+            if gap < needed:
+                net = item.GetNetname() or "?"
+                problems.append(
+                    f"{net} passes {gap:.2f} mm from {ref} at ({hx}, {hy}); "
+                    f"{needed:.2f} mm is the minimum")
+    if problems:
+        raise SystemExit("copper runs into a mounting hole:\n  "
+                         + "\n  ".join(problems))
+
+
 # ---------------------------------------------------------------------------
 # copper, outline, silk
 # ---------------------------------------------------------------------------
 
-def add_copper(board, rectangle):
+def add_copper(board, points):
     """GND poured on both layers.
 
     Free, on a two-layer board that is mostly air. What it buys is a return
@@ -429,8 +603,8 @@ def add_copper(board, rectangle):
     of them -- worth little against a Nu's low-impedance output, but worth
     nothing against it either, and it costs the same to fabricate.
     """
-    board.zone("GND", F, rectangle)
-    board.zone("GND", B, rectangle)
+    board.zone("GND", F, points)
+    board.zone("GND", B, points)
 
 
 def silkscreen(board):
@@ -441,11 +615,17 @@ def silkscreen(board):
     checked against the board rather than trusted: a fab silently clips what
     runs off the edge, and the line most worth keeping is the longest one.
     """
-    # Two widths, not one. A line spanning the whole board runs under J1's
-    # silk outline and comes out unreadable, so the three legend lines are
-    # centred on the strip *west* of the connector and checked against that
-    # width instead of the board's.
+    # Three widths, not one, because three different things are in the way at
+    # three different heights.
+    #
+    #   full    a band with nothing in it across the whole board
+    #   between the north and south margins, where a line long enough to
+    #           reach x < 3.6 or x > 46.4 would print over a mounting hole
+    #   body    the middle band, which J1 occupies from x = 41.5 east
     full_middle = BOARD_W / 2
+    full_width = BOARD_W - 2.0
+    between_middle = BOARD_W / 2
+    between_width = (BOARD_W - 2 * (_HOLE_INSET + HOLE_DRILL / 2)) - 2.0
     body_middle = (J1_PIN1[0] - 2.0) / 2
     body_width = J1_PIN1[0] - 2.0 - 2.0
 
@@ -458,24 +638,31 @@ def silkscreen(board):
             f"{width:.0f} mm is free: {body!r}")
         board.text(body, middle, y, size=size)
 
-    legend("CYCFI NU HUB   6 x NU CAPSULE -> INTERNAL BREAKOUT   rev A",
-           1.4, 0.85, full_middle, BOARD_W - 2.0)
-    legend(circuit.SUPPLY_NOTE.upper(), 22.8, 0.8, full_middle, BOARD_W - 2.0)
+    # The north margin. Two lines rather than the strip's one: 50 mm is not
+    # 61 mm and the old single title no longer fits between the two holes.
+    legend("CYCFI NU HUB   rev A", 1.7, 0.9, between_middle, between_width)
+    legend("6 x NU CAPSULE -> INTERNAL BREAKOUT", 3.5, 0.8,
+           between_middle, between_width)
 
     # The channel columns. CH1 is the low E and they run in string order, so
-    # the number is the only thing that needs printing.
+    # the number is the only thing that needs printing. Above the row here,
+    # not below it: below is where the fan-in band starts.
     for channel in range(1, circuit.CHANNELS + 1):
-        board.text(f"CH{channel}", column_x(channel), 6.7, size=1.2)
+        board.text(f"CH{channel}", column_x(channel), 5.3, size=1.2)
 
-    # Everything a person needs to make up a cable, in the empty band between
-    # the two header rows. The band has to hold these three lines *and* the
-    # power row's designators, which is what sets the spacing: below 16.6 is
-    # the designators' and the 1x03 outlines' territory.
-    legend("PIN 1 IS THE WEST PAD ON EVERY HEADER", 12.2, 0.8,
+    # Everything a person needs to make up a cable, in the middle band west of
+    # the connector. Three lines where the strip had three, but split
+    # differently: the row legend was one 55-character line and the middle
+    # band is only 37 mm wide, so it reads as two.
+    legend("PIN 1 IS THE WEST PAD ON EVERY HEADER", 13.0, 0.8,
            body_middle, body_width)
-    legend("N ROW = SIGNAL 1=OUT 2=GND   S ROW = POWER 1=V+ 2,3=GND", 14.0,
-           0.8, body_middle, body_width)
-    legend(circuit.SILK_NOTE, 15.8, 0.8, body_middle, body_width)
+    legend("N ROW = SIGNAL  1=OUT 2=GND", 15.2, 0.8, body_middle, body_width)
+    legend("S ROW = POWER  1=V+ 2,3=GND", 17.4, 0.8, body_middle, body_width)
+
+    # The one line that must not be missed goes full width, in the clear band
+    # between J1's bottom pair and the power row's designators.
+    legend(circuit.SILK_NOTE, 23.4, 0.8, full_middle, full_width)
+    legend(circuit.SUPPLY_NOTE.upper(), 30.4, 0.8, full_middle, full_width)
 
     # J1's own corners. Pins 1 and 2 are the ones that must stay empty, and
     # pins 9 and 10 are the ones that hurt if a wire lands on the wrong one.
@@ -560,7 +747,8 @@ def mechanical(board, rectangle):
         }
 
     parts = [placement("J1", "trunk",
-                       "2x5 to Internal Breakout J3; cable leaves the east end")]
+                       "2x5 to Internal Breakout J3; cable leaves the east "
+                       "side, over the 3.5 mm margin beyond the connector")]
     for channel in range(1, circuit.CHANNELS + 1):
         parts.append(placement(
             f"S{channel}", "capsule_signal",
@@ -580,9 +768,9 @@ def mechanical(board, rectangle):
             "ref": ref,
             "x": round(to_mm(position.x), 3),
             "y": round(to_mm(position.y), 3),
-            "drill": 2.7,
+            "drill": HOLE_DRILL,
             "plated": False,
-            "screw": "M2.5",
+            "screw": circuit.MOUNTING_PATTERN["hole_screw"],
             "body": body(ref),
         })
 
@@ -606,9 +794,20 @@ def mechanical(board, rectangle):
             "width": round(right - left, 3),
             "height": round(bottom - top, 3),
             "thickness": 1.6,
-            "shape": "rectangle",
-            "corner_radius": 0.0,
+            "shape": "rounded rectangle",
+            "corner_radius": BOARD_R,
             "copper_layers": 2,
+        },
+        # Where the outline and the hole pattern came from, carried across to
+        # the enclosure with the caveat attached. A pocket cut from this fits
+        # a v2.5 breakout as well as a hub; whether it fits a v2.6 is unknown,
+        # because Cycfi have published no dimensions for one.
+        "outline_source": {
+            "matches": "Cycfi Internal Breakout v2.5",
+            "from": circuit.MOUNTING_PATTERN["source"],
+            "caveat": "v2.6 is a physical redesign with no published "
+                      "dimensions; this is the v2.5 geometry. Measure a v2.6 "
+                      "before cutting anything that must fit one.",
         },
         "mounting_holes": holes,
         "parts": parts,
@@ -626,25 +825,50 @@ def mechanical(board, rectangle):
     }
 
 
-def check_fits(board, rectangle):
-    """Nothing may stick out of the outline.
+def check_fits(board, rectangle, radius):
+    """Nothing may stick out of the outline, corners included.
 
     board_extent() in the sibling project derives the outline from the parts;
-    here the strip is a declared size, because half the point of the layout is
-    that it is a known, small rectangle. That trade needs this check, or a
-    part nudged east just quietly hangs over the edge.
+    here the size is declared, because the whole point of this revision is
+    that it is somebody else's size. That trade needs this check, or a part
+    nudged east just quietly hangs over the edge.
+
+    The corners count. A courtyard can sit inside the bounding rectangle on
+    all four sides and still overhang a rounded corner, and on a board whose
+    corners were rounded specifically so it would drop into a pocket, that is
+    exactly the failure worth catching.
     """
     left, top, right, bottom = rectangle
+    # A rounded rectangle is exactly the set of points within `radius` of the
+    # rectangle inset by `radius`, so clamping a point into that inner
+    # rectangle gives the nearest point on the shape and one comparison
+    # settles both the edges and the corners.
+    inner = (left + radius, top + radius, right - radius, bottom - radius)
+
+    def overhang(px, py):
+        cx = min(max(px, inner[0]), inner[2])
+        cy = min(max(py, inner[1]), inner[3])
+        return ((px - cx) ** 2 + (py - cy) ** 2) ** 0.5 - radius
+
     problems = []
     for ref, footprint in board.footprints.items():
-        box = footprint.GetCourtyard(pcbnew.F_CrtYd).BBox()
-        if box.GetWidth() == 0:
-            continue        # mounting holes carry no courtyard
-        edges = (to_mm(box.GetLeft()), to_mm(box.GetTop()),
-                 to_mm(box.GetRight()), to_mm(box.GetBottom()))
-        if (edges[0] < left or edges[1] < top
-                or edges[2] > right or edges[3] > bottom):
-            problems.append(f"{ref} courtyard {edges} is outside {rectangle}")
+        # The courtyard polygon, not its bounding box. The M2 mounting holes'
+        # courtyards are circles that clear the board edge by 0.03 mm, and the
+        # corners of a circle's bounding box are not on the circle -- testing
+        # those reports all four holes as hanging 0.7 mm off a board they fit.
+        courtyard = footprint.GetCourtyard(pcbnew.F_CrtYd)
+        worst = None
+        for index in range(courtyard.OutlineCount()):
+            chain = courtyard.Outline(index)
+            for vertex in range(chain.PointCount()):
+                corner = chain.CPoint(vertex)
+                beyond = overhang(to_mm(corner.x), to_mm(corner.y))
+                if worst is None or beyond > worst[0]:
+                    worst = (beyond, to_mm(corner.x), to_mm(corner.y))
+        if worst is not None and worst[0] > 1e-6:
+            problems.append(
+                f"{ref} courtyard hangs {worst[0]:.3f} mm over the outline at "
+                f"({worst[1]:.3f}, {worst[2]:.3f})")
     if problems:
         raise SystemExit("parts do not fit the board:\n  " + "\n  ".join(problems))
 
@@ -658,13 +882,18 @@ def main():
     route_far_row(board)
     route_supply(board)
     vias = stitch(board)
+    check_holes_clear(board)
 
     rectangle = (0.0, 0.0, BOARD_W, BOARD_H)
-    check_fits(board, rectangle)
-    board.outline(rectangle)
+    check_fits(board, rectangle, BOARD_R)
+    board.outline(rectangle, BOARD_R)
+    # The pours follow the rounded corners in as well. Inset as a plain
+    # rectangle their corners would poke 0.02 mm outside a 1.75 mm arc -- not
+    # much, but it is copper over the edge of the board, and it is the sort of
+    # thing that survives review precisely because it is too small to see.
     inner = (rules.ZONE_INSET, rules.ZONE_INSET,
              BOARD_W - rules.ZONE_INSET, BOARD_H - rules.ZONE_INSET)
-    add_copper(board, inner)
+    add_copper(board, rounded_rectangle_polygon(inner, BOARD_R - rules.ZONE_INSET))
     silkscreen(board)
     designators(board)
 

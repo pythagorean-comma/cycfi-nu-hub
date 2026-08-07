@@ -5,9 +5,11 @@ Internal Breakout**, so that wiring them up is thirteen crimped connectors
 instead of a bundle of flying leads into a connector that was designed for a
 pre-assembled Nu Multi.
 
-The board is 61 × 24 mm, two layers, and **carries no components at all**. It
-is thirteen connectors, one solder pad, four holes and some copper. That is
-not minimalism for its own sake — see [No components](#no-components).
+The board is 50 × 35 mm — **the Internal Breakout's own outline and hole
+pattern**, so the two mount the same way — two layers, and **carries no
+components at all**. It is thirteen connectors, one solder pad, four holes and
+some copper. That is not minimalism for its own sake — see
+[No components](#no-components).
 
 ---
 
@@ -194,10 +196,26 @@ exists to avoid.
 
 ## How the board came out
 
-A 61 × 24 mm strip. Signal headers along the north edge, power headers along
-the south, the 2×5 at the east end, six channel columns on a 7 mm pitch with
-**CH1 (low E) at the west**, so reading the board left to right reads the
-strings low to high. The two cable bundles leave on opposite edges.
+**50 × 35 mm with 1.75 mm corners and four M2 holes on 45 × 30 mm centres —
+the Internal Breakout's own outline**, so one mount, one cavity cut-out or one
+enclosure pocket takes either board. The numbers were measured off Cycfi's
+`internal_breakout.brd` (Eagle layer 20) and live in `design.MOUNTING_PATTERN`;
+`gen_pcb.py` derives every dimension from there and asserts the hole centres
+against it, so the outline cannot drift away from the board it is copying.
+
+Read [the outline is v2.5's](#the-outline-is-v25s) before cutting anything
+that has to fit a real breakout.
+
+Inside it the board is three bands: signal headers across the north, power
+headers across the south, and between them a middle band carrying the 2×5 at
+its east end, the fan-in to it, the V+ bus and the grounding pad. Six channel
+columns on a 7 mm pitch with **CH1 (low E) at the west**, so reading the board
+left to right still reads the strings low to high, and the two capsule bundles
+still leave on opposite edges with the trunk leaving east.
+
+Six columns at 7 mm plus a 1×3's courtyard at each end is 42 mm of the 50
+available. There is no slack in the width: `gen_pcb.py` asserts the columns
+are centred, and moving them costs the fan-in its margin at the east edge.
 
 `verify.check_string_order()` reads the string order back off the built
 copper. Nothing electrical would notice it being wrong.
@@ -226,20 +244,38 @@ what looks natural:
   westmost channel wants the deepest lane, and every drop clears every lane
   already laid. Mirror the board and all three cross.
 - **The detour goes north of the signal headers, not between them and J1.**
-  Put the lanes south of the header row and the drops cross them; put them
-  north and the headers sit on the boundary, where the three paths nest.
+  Each lane is reached by a drop out of its own header, and each descent
+  begins at its own lane. So the outermost path needs the lane furthest from
+  the header row *and* a lane outside every descent — and those are the same
+  direction only on the side the descents run away from. North, they coincide
+  and the three paths nest. South, they oppose: the outermost lane clears the
+  drops and then crosses CH4's descent on its way east.
 
-I got the second one wrong twice before checking it as a planarity problem
-rather than by eye.
+I got the second one wrong twice on the 61 × 24 strip before checking it as a
+planarity problem rather than by eye, and wrong once more on this outline —
+the middle band here is wide enough to look like the obvious home for the
+lanes, and DRC reported the crossing within a minute. `check_placement()` now
+asserts that the lane order and the descent order are reverses of each other,
+which is the property that was being violated each time.
 
 ### Everything else
 
 - The power row has no gaps: six 1×3 footprints on a 7 mm pitch leave 0.78 mm
   between silk outlines, which is why nothing crosses it and why the power
   designators are printed above the row instead of beside it.
-- The two eastern mounting holes set the board width. Their courtyards are
-  6 mm across because they have to clear a screw head, and they have to sit
-  clear of the three descents to J1's far row.
+- The mounting holes no longer set the board width — the breakout does — but
+  they became harder to route around, not easier. At 2.5 mm in from all four
+  edges, H3 sits in the same north-east margin the three descents run down,
+  and CH2's lane passes 1.95 mm from its centre against a 1.35 mm minimum. An
+  unplated hole has no pad, no net and no courtyard, so it is invisible to
+  every other check in `gen_pcb.py`: `check_holes_clear()` exists because a
+  track laid straight across one would build clean, match the netlist and
+  arrive as a board with a screw hole through a signal.
+- The corners are rounded to 1.75 mm because the breakout's are. A square
+  corner is *more* material than a round one, so matching the outline and
+  leaving the corners sharp would give a board that measures right and will
+  not drop into the pocket. The pours follow the radii in as well —
+  inset as a plain rectangle their corners poke 0.02 mm past the arc.
 - V+ runs as one bus on F.Cu between J1's bottom pair and the power row.
   0.60 mm, which is not about current — six capsules draw single-figure
   milliamps between them — but about keeping the run stiff and inspectable.
@@ -267,11 +303,39 @@ CH1/CH2, supply/ground. The pin map this board is built on survives the
 revision.
 
 What a printed pin map cannot tell you is which physical end of the connector
-is position 1, and the v2.6 board is a different shape from the v2.5 one
-(Cycfi list it as 27 × 38 mm against the 50 × 35 mm in the Eagle files), so
-the connector may well sit differently. That is still one meter reading to
-settle: **pin 9 to the supply rail, pin 10 to ground, pin 7 to channel 1.**
-[`CABLES.md`](CABLES.md) has it as a numbered step.
+is position 1, and v2.6 is a physical redesign, so the connector may well sit
+differently. That is still one meter reading to settle: **pin 9 to the supply
+rail, pin 10 to ground, pin 7 to channel 1.** [`CABLES.md`](CABLES.md) has it
+as a numbered step.
+
+### The outline is v2.5's
+
+This board is 50 × 35 mm because that is what Cycfi's `internal_breakout.brd`
+measures, and that file is **v2.5**. No dimension for v2.6 has ever been
+published: the v2.6.1 datasheet is a pinout document with no measurements in
+it, and the 2023 announcement of the redesign gives none either. So the
+outline this board copies is the only breakout outline that exists in
+measurable form, and it is a revision behind the one the hub is wired for.
+
+An earlier revision of these docs claimed Cycfi list v2.6 as 27 × 38 mm. That
+was a misattribution — the figure is from the Nu Series **v1** page and names
+no version. [`cycfi-sources.md`](cycfi-sources.md) records what happened.
+
+Two consequences, and only the second one costs anything:
+
+- **Electrically, nothing.** The outline is not part of the circuit. The pin
+  map is what matters and it is cross-checked against the v2.6.1 datasheet
+  above.
+- **Mechanically, it is an assumption.** A pocket, bracket or cavity cut from
+  `fab/cycfi-nu-hub-mechanical.json` fits a hub and a v2.5 breakout. Whether
+  it fits a **v2.6** breakout is unknown. The JSON carries that caveat in an
+  `outline_source` field so it crosses into the enclosure repository with the
+  geometry rather than being remembered separately.
+
+**Measure a v2.6 board before anything is cut to fit one.** Four numbers
+settle it: overall width and height, hole diameter, and hole centres in both
+axes. If they differ, `design.MOUNTING_PATTERN` is the one block that changes
+and the layout re-derives from it.
 
 **What voltage the capsules will see.** On v2.5 the Nu Multi input's supply
 pin is a net called V+, fed from `J14`, a jumper silkscreened `PWR SELECT`

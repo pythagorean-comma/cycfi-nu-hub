@@ -6,9 +6,15 @@ A 6-channel hub board for wiring six individual **Cycfi Nu v2 capsules** into a 
 Built against Cycfi's published Eagle sources at
 <https://github.com/cycfi/nu>
 
-61 × 24 mm, two layers, and **no components** — thirteen connectors, a
-grounding pad and some copper. The capsules already decouple themselves, so
-there is nothing left for this board to do but join things up correctly.
+50 × 35 mm on the **Internal Breakout's own outline and M2 hole pattern**, two
+layers, and **no components** — thirteen connectors, a grounding pad and some
+copper. The capsules already decouple themselves, so there is nothing left for
+this board to do but join things up correctly.
+
+The outline is measured from Cycfi's Eagle files, which are **v2.5**; no
+dimension has ever been published for the v2.6 this hub is wired for. That
+costs nothing electrically and is an open assumption mechanically — see
+[`docs/DESIGN.md`](docs/DESIGN.md).
 
 ## Everything is generated
 
@@ -74,7 +80,11 @@ connections. A fabrication package is written.
 and nothing measured, so every claim in this repository comes from Cycfi's
 sources and from the generators — not from a bench.
 
-Two things to settle before ordering, both in the last section of
+Three things to settle before ordering, all in the last section of
 [`docs/DESIGN.md`](docs/DESIGN.md): Cycfi publish sources for breakout **v2.5** and this
-targets **v2.6**, which is three continuity readings on J3 to confirm; and the
-breakout's `PWR SELECT` jumper decides what voltage six capsules will see.
+targets **v2.6**, which is three continuity readings on J3 to confirm; the
+breakout's `PWR SELECT` jumper decides what voltage six capsules will see; and
+the outline copied here is **v2.5's**, because no dimension for v2.6 has ever
+been published. Measuring a v2.6 board — width, height, hole diameter, hole
+centres — is what closes the last one, and `design.MOUNTING_PATTERN` is the
+single block that would change.

@@ -1,6 +1,6 @@
 "Reference","Value","Footprint","QUANTITY","Description"
 "E1","SHIELD/GND","TestPoint:TestPoint_THTPad_2.0x2.0mm_Drill1.0mm","1","Solder pad to GND: trunk cable screen, cavity foil, optionally bridge earth"
-"H1-H4","M2.5","MountingHole:MountingHole_2.7mm_M2.5","4","M2.5 clearance hole, unplated"
+"H1-H4","M2","MountingHole:MountingHole_2.2mm_M2","4","M2 clearance hole, unplated"
 "J1","TO BREAKOUT J3","Connector_PinHeader_2.00mm:PinHeader_2x05_P2.00mm_Vertical","1","2x5 2.00mm to Internal Breakout J3 (NU MULTI INPUT 1); pins 1-2 not fitted"
 "P1","CH1 PWR","Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical","1","Capsule 1, low E (6th) -- power, to capsule H2: 1=V+, 2=GND, 3=GND"
 "P2","CH2 PWR","Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical","1","Capsule 2, A (5th) -- power, to capsule H2: 1=V+, 2=GND, 3=GND"

@@ -4236,7 +4236,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "M2.5"
+		(property "Value" "M2"
 			(at 152.4 247.65 0)
 			(effects
 				(font
@@ -4245,7 +4245,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5"
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
 			(at 152.4 241.3 0)
 			(effects
 				(font
@@ -4263,7 +4263,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "M2.5 clearance hole, unplated"
+		(property "Description" "M2 clearance hole, unplated"
 			(at 152.4 241.3 0)
 			(effects
 				(font
@@ -4299,7 +4299,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "M2.5"
+		(property "Value" "M2"
 			(at 165.1 247.65 0)
 			(effects
 				(font
@@ -4308,7 +4308,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5"
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
 			(at 165.1 241.3 0)
 			(effects
 				(font
@@ -4326,7 +4326,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "M2.5 clearance hole, unplated"
+		(property "Description" "M2 clearance hole, unplated"
 			(at 165.1 241.3 0)
 			(effects
 				(font
@@ -4362,7 +4362,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "M2.5"
+		(property "Value" "M2"
 			(at 177.8 247.65 0)
 			(effects
 				(font
@@ -4371,7 +4371,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5"
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
 			(at 177.8 241.3 0)
 			(effects
 				(font
@@ -4389,7 +4389,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "M2.5 clearance hole, unplated"
+		(property "Description" "M2 clearance hole, unplated"
 			(at 177.8 241.3 0)
 			(effects
 				(font
@@ -4425,7 +4425,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "M2.5"
+		(property "Value" "M2"
 			(at 190.5 247.65 0)
 			(effects
 				(font
@@ -4434,7 +4434,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5"
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
 			(at 190.5 241.3 0)
 			(effects
 				(font
@@ -4452,7 +4452,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "M2.5 clearance hole, unplated"
+		(property "Description" "M2 clearance hole, unplated"
 			(at 190.5 241.3 0)
 			(effects
 				(font

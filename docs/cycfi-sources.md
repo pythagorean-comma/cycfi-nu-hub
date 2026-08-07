@@ -47,9 +47,22 @@ Two differences worth recording:
 - The supply pin is labelled **10V** on 2.6.1, where the v2.5 schematic calls
   the net `V+` and feeds it from the `PWR SELECT` jumper. Measure it rather
   than assuming which.
-- The v2.6 board is physically redesigned — Cycfi list it as 27 × 38 mm
-  against the 50 × 35 mm outline in the Eagle files — so the connector's
-  orientation on the board is not carried over from what is drawn here.
+- **The v2.6 board's size is not published anywhere.** This datasheet carries
+  no dimensions at all — it is a pinout document, eleven pages of connector
+  diagrams — and neither does the
+  [2023 redesign announcement](https://www.cycfi.com/2023/04/internal-breakout-redesign/)
+  that introduced v2.6. So it is not known whether the connector sits where
+  the Eagle files put it.
+
+  An earlier revision of this document said Cycfi list v2.6 as 27 × 38 mm.
+  **That was wrong.** The figure is real but it is not v2.6's: it comes from
+  the prose on the [Nu Series **v1** project
+  page](https://www.cycfi.com/projects/nu-series/) — "The small (27mm x 38mm)
+  internal breakout board…" — a page Cycfi themselves head with a notice
+  pointing to v2, and which names no breakout version at all. It was quoted
+  here as a v2.6 specification, which it never was. The only measured
+  breakout outline in existence is the 50 × 35 mm one in the Eagle files
+  below.
 
 The rest of this document is the v2.5 Eagle extraction, unchanged.
 
