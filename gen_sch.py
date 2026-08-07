@@ -35,6 +35,14 @@ J1_LEFT_LABEL_X = 270.51
 J1_RIGHT_LABEL_X = 303.53
 J1_GND_X = 298.45
 
+# The `direct` variant's right-hand column: two jack connectors instead of one
+# breakout connector, and the two parts below them. Same column, same label
+# geometry -- only the count differs.
+J10_ORIGIN = (285.75, 60.96)
+J11_ORIGIN = (285.75, 116.84)
+FUSE_ORIGIN = (260.35, 180.34)
+BULK_ORIGIN = (299.72, 180.34)
+
 NOTE_X = 152.4
 NOTE_Y = 106.68
 
@@ -131,6 +139,77 @@ def breakout(sch):
              ox - 15.24, oy - 11.43, size=1.4)
 
 
+def jack(sch):
+    """J10 and J11, drawn pin by pin against the breakout's own numbering.
+
+    Two connectors and not one, because the loom they replace has two. Between
+    them they carry fifteen channel positions and this hub drives six of them,
+    so most of what is drawn here is no-connect flags -- which is the point:
+    an unfitted position is a decision, and ERC should be told about it rather
+    than left to infer it.
+    """
+    for ref, table, origin, caption in (
+            ("J10", circuit.JACK_J10, J10_ORIGIN, "channels 1-6, and a ground"),
+            ("J11", circuit.JACK_J11, J11_ORIGIN, "VIN and two grounds")):
+        ox, oy = origin
+        part = place(sch, ref, ox, oy)
+        for pin in circuit.JACK_UNUSED[ref]:
+            sch.no_connect(*part.pin(pin))
+
+        for pin, net in sorted(table.items()):
+            if pin in circuit.JACK_UNUSED[ref]:
+                continue
+            position = part.pin(pin)
+            left = pin % 2 == 1
+            # Odd pins leave to the left, even pins to the right, so the
+            # drawing keeps the connector's own two-row shape. Grounds drop on
+            # whichever side they left by rather than crossing the symbol --
+            # J11 has one on each.
+            column = J1_LEFT_LABEL_X if left else J1_RIGHT_LABEL_X
+            if net == "GND":
+                column = J1_LEFT_LABEL_X if left else J1_GND_X
+                sch.wire(position, (column, position[1]),
+                         (column, position[1] + 6.35))
+                sch.power("power:GND", column, position[1] + 6.35)
+                continue
+            sch.wire(position, (column, position[1]))
+            sch.label(net, column, position[1], angle=180 if left else 0)
+
+        sch.text(f"{ref} -> 19-pin output jack loom", ox - 15.24, oy - 15.24,
+                 size=2.0)
+        sch.text(caption, ox - 15.24, oy - 11.43, size=1.4)
+
+
+def supply(sch):
+    """F1 and C1, the only two parts on either board.
+
+    VIN arrives from the jack, passes through F1 and leaves as V+. There is no
+    regulator because there is nothing to regulate to: the capsules run
+    anywhere from 5 V to 18 V, which is why Cycfi deleted theirs in breakout
+    v2.6.
+    """
+    fx, fy = FUSE_ORIGIN
+    fuse = place(sch, "F1", fx, fy)
+    sch.wire(fuse.pin(1), (fx, fy - 10.16))
+    sch.label("VIN", fx, fy - 10.16, angle=90)
+    sch.wire(fuse.pin(2), (fx, fy + 10.16))
+    sch.label("V+", fx, fy + 10.16, angle=270)
+
+    cx, cy = BULK_ORIGIN
+    bulk = place(sch, "C1", cx, cy)
+    sch.wire(bulk.pin(1), (cx, cy - 10.16))
+    sch.label("V+", cx, cy - 10.16, angle=90)
+    sch.wire(bulk.pin(2), (cx, cy + 7.62))
+    sch.power("power:GND", cx, cy + 7.62)
+
+    sch.text("Series, not shunt: F1 protects the run it is in.",
+             fx - 15.24, fy + 20.32, size=1.4)
+    sch.text("C1 is bulk where power enters the board, not decoupling",
+             fx - 15.24, fy + 24.13, size=1.4)
+    sch.text("at a load -- every capsule carries its own. See design.py.",
+             fx - 15.24, fy + 27.94, size=1.4)
+
+
 def grounding(sch):
     """E1, the ground tail pad."""
     ox, oy = PAD_ORIGIN
@@ -142,18 +221,25 @@ def grounding(sch):
 
 
 def mounting(sch):
-    """The four mounting holes, so the board and the drawing agree on them."""
+    """The mounting holes, so the board and the drawing agree on them."""
     ox, oy = HOLE_ORIGIN
     for offset, ref in enumerate(circuit.MOUNTING_HOLES):
         place(sch, ref, ox + offset * 12.7, oy)
-    sch.text("M2.5 clearance, unplated -- not on GND", ox - 1.27, oy + 8.89,
+    sch.text("M2 clearance, unplated -- not on GND", ox - 1.27, oy + 8.89,
              size=1.4)
 
 
 def flags(sch):
-    """PWR_FLAGs so ERC knows V+ and GND arrive from the connector."""
+    """PWR_FLAGs so ERC knows the rails arrive from a connector.
+
+    The rails and their order come from design.py, so the drawing cannot
+    declare a different set from the netlist -- the `direct` board needs three
+    where the breakout board needs two, because V+ arrives through a polyfuse
+    and ERC sees nothing driving the far side of a passive.
+    """
     ox, oy = FLAG_ORIGIN
-    for offset, (ref, net) in enumerate((("#FLG01", "V+"), ("#FLG02", "GND"))):
+    for offset, net in enumerate(circuit.PWR_FLAG_RAILS):
+        ref = f"#FLG{offset + 1:02d}"
         x = ox + offset * 25.4
         flag = sch.place(ref, "power:PWR_FLAG", "PWR_FLAG", x, oy)
         sch.wire(flag.pin(1), (x, oy + 5.08))
@@ -161,7 +247,8 @@ def flags(sch):
             sch.power("power:GND", x, oy + 5.08)
         else:
             sch.label(net, x, oy + 5.08, angle=270)
-    sch.text("No supply on this board: both rails arrive on J1.",
+    arrives = "J1" if circuit.VARIANT == "breakout" else "the jack loom"
+    sch.text(f"No supply on this board: every rail arrives on {arrives}.",
              ox - 5.08, oy - 6.35, size=1.4)
 
 
@@ -179,36 +266,73 @@ def notes(sch):
         sch.text(body, x, y, size=size)
         y += step
 
-    line(circuit.SILK_NOTE, size=2.2)
+    line(circuit.BOARD_NOTE, size=2.2)
     line(f"Verified against {circuit.CYCFI_SOURCE}.", size=1.4, step=6.35)
 
-    line("Breakout J3, pin for pin:", size=1.8)
-    for pin, net in sorted(circuit.BREAKOUT_J3.items()):
-        unused = pin in circuit.BREAKOUT_UNUSED
-        note = "  not fitted (shared with J4 pin 7/8)" if unused else ""
-        line(f"    {pin:>2} = {net}{note}", size=1.4, step=3.81)
+    if circuit.VARIANT == "breakout":
+        line("Breakout J3, pin for pin:", size=1.8)
+        for pin, net in sorted(circuit.BREAKOUT_J3.items()):
+            unused = pin in circuit.BREAKOUT_UNUSED
+            note = "  not fitted (shared with J4 pin 7/8)" if unused else ""
+            line(f"    {pin:>2} = {net}{note}", size=1.4, step=3.81)
 
-    y += 3.81
-    line("Reversed, a 2x5 maps pin n to pin 11-n, so the two empty",
+        y += 3.81
+        line("Reversed, a 2x5 maps pin n to pin 11-n, so the two empty",
+             size=1.4, step=3.81)
+        line("positions land on V+ and GND: a backwards cable delivers no",
+             size=1.4, step=3.81)
+        line("supply rather than the wrong one. Nothing is damaged.",
+             size=1.4, step=6.35)
+
+        line("No components fitted. Each capsule carries its own",
+             size=1.4, step=3.81)
+        line(f"{circuit.CAPSULE_DECOUPLING},", size=1.4, step=3.81)
+        line("and pin 1 of its power header is Schottky protected on the",
+             size=1.4, step=3.81)
+        line("capsule. There is nothing left for this board to do.",
+             size=1.4, step=6.35)
+
+        line(circuit.SUPPLY_NOTE, size=1.4, step=3.81)
+        return
+
+    for ref, table in (("J10", circuit.JACK_J10), ("J11", circuit.JACK_J11)):
+        line(f"{ref}, pin for pin against the breakout's own:", size=1.8)
+        for pin, net in sorted(table.items()):
+            unused = pin in circuit.JACK_UNUSED[ref]
+            note = "  not fitted (this hub carries six channels)" if unused else ""
+            line(f"    {pin:>2} = {net}{note}", size=1.4, step=3.81)
+        y += 3.81
+
+    line("Reversed, a 2x5 maps pin n to pin 11-n. On J10 that puts",
          size=1.4, step=3.81)
-    line("positions land on V+ and GND: a backwards cable delivers no",
+    line("pin 2 (CH1) on pin 9 (GND) and shorts the capsule outputs",
          size=1.4, step=3.81)
-    line("supply rather than the wrong one. Nothing is damaged.",
+    line("to ground -- recoverable, but NOT harmless the way a",
+         size=1.4, step=3.81)
+    line("reversed cable is on the breakout variant. Check first.",
          size=1.4, step=6.35)
 
-    line("No components fitted. Each capsule carries its own", size=1.4, step=3.81)
+    line("Two parts, and only two. Each capsule carries its own",
+         size=1.4, step=3.81)
     line(f"{circuit.CAPSULE_DECOUPLING},", size=1.4, step=3.81)
-    line("and pin 1 of its power header is Schottky protected on the",
+    line("and its power pin is Schottky protected on the capsule, so",
          size=1.4, step=3.81)
-    line("capsule. There is nothing left for this board to do.",
+    line("nothing here is decoupling or reverse protection. F1 is in",
+         size=1.4, step=3.81)
+    line("series and C1 is bulk at the point power enters the board.",
          size=1.4, step=6.35)
 
-    line(circuit.SUPPLY_NOTE, size=1.4, step=3.81)
+    line("No regulator: Cycfi deleted theirs in breakout v2.6 because",
+         size=1.4, step=3.81)
+    line("the Nu capsules run from 5 V to 18 V. V+ is whatever VIN is.",
+         size=1.4, step=3.81)
 
 
 def build(path):
-    sch = Schematic(circuit.PROJECT,
-                    title="Cycfi Nu hub -- 6 capsules to Internal Breakout",
+    title = ("Cycfi Nu hub -- 6 capsules to Internal Breakout"
+             if circuit.VARIANT == "breakout"
+             else "Cycfi Nu hub (direct) -- 6 capsules to the 19-pin jack")
+    sch = Schematic(circuit.PROJECT, title=title,
                     rev="A", company="pythagorean-comma",
                     date="2026-08-03", paper="A3")
     for lib_id, (nick, libname, symname, rename) in circuit.LIBS.items():
@@ -216,7 +340,11 @@ def build(path):
 
     for index in range(1, circuit.CHANNELS + 1):
         capsule_row(sch, index)
-    breakout(sch)
+    if circuit.VARIANT == "breakout":
+        breakout(sch)
+    else:
+        jack(sch)
+        supply(sch)
     grounding(sch)
     mounting(sch)
     flags(sch)

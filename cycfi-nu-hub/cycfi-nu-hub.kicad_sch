@@ -2157,7 +2157,7 @@
 		)
 		(uuid "894170a1-a90f-5189-b502-9ca88e29c507")
 	)
-	(text "M2.5 clearance, unplated -- not on GND"
+	(text "M2 clearance, unplated -- not on GND"
 		(at 151.13 250.19 0)
 		(effects
 			(font
@@ -2165,9 +2165,9 @@
 			)
 			(justify left)
 		)
-		(uuid "6b39b64b-780b-5048-991d-d9999d5d1e72")
+		(uuid "410d988c-c509-5a5f-b147-18634cbf6353")
 	)
-	(text "No supply on this board: both rails arrive on J1."
+	(text "No supply on this board: every rail arrives on J1."
 		(at 40.64 234.95 0)
 		(effects
 			(font

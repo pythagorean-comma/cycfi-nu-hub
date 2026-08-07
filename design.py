@@ -23,13 +23,39 @@ against the numbers transcribed from Cycfi's schematics at the top of this
 file, so the whole design fails to load rather than builds wrong.
 """
 
+import os
+
 CHANNELS = 6
+
+# ---------------------------------------------------------------------------
+# Which board this is
+# ---------------------------------------------------------------------------
+#
+# Two boards, and the capsule end of both is identical. What differs is what
+# the six channels arrive at:
+#
+#   breakout  the six capsules join a Cycfi Internal Breakout on channels 1-6,
+#             through one 2x5 wired one-to-one with its J3. Thirteen
+#             connectors and no components.
+#
+#   direct    the breakout is deleted and the hub drives the instrument's
+#             19-pin output jack itself, through the same two 2x5 headers the
+#             breakout presents to it. Fourteen connectors, a polyfuse and a
+#             bulk capacitor.
+#
+# The second exists because for an installation that uses none of the
+# breakout's aux, CV, GK or power-select features, the breakout is a wire and
+# a fuse -- see JACK_J10 for the evidence, which is Cycfi's own netlist.
+VARIANTS = ("breakout", "direct")
+VARIANT = os.environ.get("CYCFI_HUB_VARIANT", "breakout")
+assert VARIANT in VARIANTS, (
+    f"CYCFI_HUB_VARIANT={VARIANT!r} is not one of {VARIANTS}")
 
 # Shared by the schematic, the board and the project scaffolding. The
 # schematic's symbol UUIDs are derived from this name, and the board's
 # footprints are linked back to those UUIDs, so the two generators must agree
 # on it exactly -- hence one constant rather than three string literals.
-PROJECT = "cycfi-nu-hub"
+PROJECT = "cycfi-nu-hub" if VARIANT == "breakout" else f"cycfi-nu-hub-{VARIANT}"
 
 # ---------------------------------------------------------------------------
 # What Cycfi's own files say
@@ -101,6 +127,73 @@ BREAKOUT_J3 = {
 }
 BREAKOUT_UNUSED = (1, 2)
 
+# ---------------------------------------------------------------------------
+# The 19-pin output jack, for the `direct` variant
+# ---------------------------------------------------------------------------
+#
+# On the breakout, the jack lands on two 2x5 headers, J10 and J11. Twenty
+# positions carrying CH1-CH15, three grounds and two VIN -- a nineteen-pin jack
+# with one position spare. The `direct` hub presents the same two headers, so
+# the instrument's existing jack loom plugs into it unmodified and the breakout
+# comes out of the chain entirely.
+#
+# The load-bearing fact is what sits between the two on the breakout: nothing.
+# Every channel net in Cycfi's internal_breakout.sch has exactly two pins on
+# it, the Nu Multi input and the jack --
+#
+#     CH1  ( 2)  J10.2, J3.7          CH4  ( 2)  J10.3, J3.6
+#     CH2  ( 2)  J10.1, J3.8          CH5  ( 2)  J10.6, J3.3
+#     CH3  ( 2)  J10.4, J3.5          CH6  ( 2)  J10.5, J3.4
+#
+# -- no buffer, no filter, no protection. Copper joining the same two points
+# replaces the breakout for audio exactly, which is the whole basis of this
+# variant. See docs/cycfi-sources.md.
+#
+# Numbered in pairs across the rows, the same convention as J3 and the same as
+# KiCad's PinHeader_2x05, which is what lets the loom be one-to-one.
+#
+# THIS IS THE v2.5 MAPPING. It was read out of the Eagle sources; the v2.6.1
+# datasheet's jack diagram carries the same label set, so the jack's *content*
+# did not change, but the ordering has only been confirmed against v2.5.
+JACK_J10 = {
+    1: "CH2",   2: "CH1",
+    3: "CH4",   4: "CH3",
+    5: "CH6",   6: "CH5",
+    7: "CH8",   8: "CH7",     # channels this hub does not carry
+    9: "GND",  10: "CH9",     # ditto pin 10
+}
+JACK_J11 = {
+    1: "CH11",  2: "CH10",    # none of the first six positions are carried
+    3: "CH13",  4: "CH12",
+    5: "CH15",  6: "CH14",
+    7: "VIN",   8: "VIN",
+    9: "GND",  10: "GND",
+}
+
+# Six capsules, so nine of the fifteen channel positions go unfitted. They are
+# named rather than blanked because the names are what check_against_cycfi()
+# uses to prove the six that *are* fitted landed on the right pins.
+JACK_UNUSED = {
+    "J10": (7, 8, 10),
+    "J11": (1, 2, 3, 4, 5, 6),
+}
+
+# What a reversed loom does, and it is worse than on the breakout board.
+#
+# A 2x5 rotated in its own plane maps pin n to 11-n. On J1 that lands the two
+# unfitted positions on V+ and GND, so the hub simply receives no supply -- the
+# reversal is harmless by construction. Here it is not: on a reversed J10, pin
+# 2 (CH1) meets pin 9 (GND) and the capsule outputs are shorted to ground.
+# Recoverable, because the TLV170 output is current-limited and sits behind a
+# 10 uF coupling cap, but no longer safe by geometry. A reversed J11 puts VIN
+# on unfitted channel positions and delivers no power, which is benign.
+#
+# The mitigation is keying, and the housings belong to Cycfi's loom rather than
+# to this board, so this is recorded and checked rather than designed away.
+JACK_REVERSAL_NOTE = (
+    "a reversed J10 shorts the capsule outputs to ground -- unlike J1 on the "
+    "breakout variant, this reversal is not harmless. Check before powering.")
+
 # V+ is not a fixed rail. On the breakout, J14 is a three-pin jumper
 # silkscreened "PWR SELECT" that ties V+ to either the unregulated input or
 # the LP2985 output. This board passes whichever it is straight through, which
@@ -113,6 +206,16 @@ SUPPLY_NOTE = "V+ passed through from breakout J3 pin 9 (PWR SELECT)"
 # catastrophically wrong by reading the board instead of the documentation.
 # verify.check_annotations() asserts it reaches both.
 SILK_NOTE = "J1 IS 1:1 WITH BREAKOUT J3 - PINS 1-2 NOT FITTED"
+
+# The same job on the `direct` board, but a different sentence, because the
+# thing most worth warning about changed. There, the pin map is not what will
+# hurt you -- a reversed J10 is. See JACK_REVERSAL_NOTE.
+JACK_SILK_NOTE = "REVERSED J10 SHORTS CH1-6 TO GND"
+
+# Whichever of the two this board carries. verify.check_annotations() asserts
+# it reached the schematic and the silkscreen, so the generators must both
+# read it from here rather than writing the sentence out.
+BOARD_NOTE = SILK_NOTE if VARIANT == "breakout" else JACK_SILK_NOTE
 
 # ---------------------------------------------------------------------------
 # The board
@@ -133,6 +236,9 @@ LIBS = {
     "power:GND": ("power", "power", "GND", None),
     "power:PWR_FLAG": ("power", "power", "PWR_FLAG", None),
 }
+if VARIANT == "direct":
+    LIBS["Device:Polyfuse"] = ("Device", "Device", "Polyfuse", None)
+    LIBS["Device:C"] = ("Device", "Device", "C", None)
 
 # All three headers are plain 2.00 mm vertical male, to match the capsules'
 # own H1/H2 and the breakout's J3. Nothing is shrouded: at 2.00 mm the stock
@@ -145,13 +251,29 @@ FP_1X02 = "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
 # shielding-foil tail or a bridge earth in stripped wire up to about 18 AWG.
 FP_PAD = "TestPoint:TestPoint_THTPad_2.0x2.0mm_Drill1.0mm"
 # M2, not M2.5, and 2.2 mm rather than 2.7: the hole pattern is Cycfi's, taken
-# off internal_breakout.brd -- see MOUNTING_PATTERN.
+# off internal_breakout.brd -- see MOUNTING_PATTERN. The `direct` variant keeps
+# M2 for the screws' sake but not the pattern, which has nothing left to match.
 FP_HOLE = "MountingHole:MountingHole_2.2mm_M2"
+
+# The two parts on the `direct` board. 0805 rather than 1206 because they live
+# in a 2.5 mm band between the jack and power rows and a 1206 courtyard does
+# not fit it; plain land patterns rather than HandSolder for the same reason.
+FP_FUSE = "Fuse:Fuse_0805_2012Metric"
+FP_CAP = "Capacitor_SMD:C_0805_2012Metric"
 
 # Pins deliberately left unconnected. verify.py treats every other floating
 # pin as an error, so this is where an intentional one is declared -- next to
 # the circuit rather than buried in the checker.
-NO_CONNECT = tuple(("J1", str(pin)) for pin in BREAKOUT_UNUSED)
+if VARIANT == "breakout":
+    NO_CONNECT = tuple(("J1", str(pin)) for pin in BREAKOUT_UNUSED)
+else:
+    # Nine of the jack's fifteen channel positions, because this hub carries
+    # six. Every one of them is a deliberate omission rather than a miss --
+    # driving CH7 or CH8 from here would contend with whatever else is on the
+    # jack, exactly as it would on the breakout's J3.
+    NO_CONNECT = tuple((ref, str(pin))
+                       for ref, pins in JACK_UNUSED.items()
+                       for pin in pins)
 
 # The board carries no components, and this is the statement of that rather
 # than an accident of nobody having added one. The capsules decouple
@@ -187,7 +309,43 @@ COMPONENT_FREE_LIBS = frozenset({
     "power:PWR_FLAG",
 })
 
-MOUNTING_HOLES = ("H1", "H2", "H3", "H4")
+# The `direct` board is allowed exactly two parts, and the reason NO_COMPONENTS
+# does not cover them is worth stating rather than assuming.
+#
+# That rule rejects *shunt* parts: a capacitor here sits a cable's length from
+# every load it could serve, and does nothing the capsule's own 100 nF and
+# 4.7 uF do not already do better, at the pin. Neither part below is that.
+#
+#   F1  is in *series* with the supply, so what it protects is the run it is
+#       in, and there is no other place on the board that run passes through.
+#       It is the only thing standing between a shorted capsule cable and
+#       whatever feeds the 19-pin jack, because the breakout that used to
+#       carry that job is what this variant deletes.
+#
+#   C1  is bulk at the point power enters the board, not decoupling at a load.
+#       Its job is the ~200 mm of loom back to the jack, which the capsule's
+#       own pair cannot see past.
+#
+# The distinction is series-versus-shunt and at-the-source-versus-at-the-load.
+# Anything that does not clear both bars belongs on the capsule, not here.
+DIRECT_ALLOWED_LIBS = COMPONENT_FREE_LIBS | {"Device:Polyfuse", "Device:C"}
+
+ALLOWED_LIBS = (COMPONENT_FREE_LIBS if VARIANT == "breakout"
+                else DIRECT_ALLOWED_LIBS)
+
+# Four corner holes on the breakout-shaped board; two on the centreline of the
+# small one, because a 30 mm connector block in a 33 mm board leaves no corner
+# for a 4.9 mm courtyard. See the layout module for where they go and why the
+# middle band is the only place they fit.
+MOUNTING_HOLES = (("H1", "H2", "H3", "H4") if VARIANT == "breakout"
+                  else ("H1", "H2"))
+
+# Which rails need a PWR_FLAG, in the order the flags are numbered. Declared
+# here rather than in each generator because the schematic has to draw exactly
+# the flags the netlist declares, and #FLG02 meaning different things in the
+# two files is the kind of drift verify.py would report as a missing part.
+PWR_FLAG_RAILS = (("V+", "GND") if VARIANT == "breakout"
+                  else ("VIN", "V+", "GND"))
 
 # The board's outline and hole pattern are the Internal Breakout's, so one
 # mount, one cavity and one enclosure pocket take either board. Measured off
@@ -238,7 +396,8 @@ class Part:
 
 
 class Design:
-    def __init__(self):
+    def __init__(self, variant=None):
+        self.variant = variant or VARIANT
         self.parts = {}
         self.nets = {}
 
@@ -274,13 +433,30 @@ class Design:
         self.check_against_cycfi()
 
     def check_no_components(self):
-        """Enforce NO_COMPONENTS: connectors, holes and a pad, nothing else."""
+        """Enforce the parts allowance for this variant.
+
+        `breakout` permits connectors, holes and a pad, nothing else.
+        `direct` additionally permits F1 and C1 and nothing beyond them -- see
+        DIRECT_ALLOWED_LIBS for why those two clear a bar that a decoupling
+        capacitor here would not.
+        """
+        allowed = (COMPONENT_FREE_LIBS if self.variant == "breakout"
+                   else DIRECT_ALLOWED_LIBS)
         offenders = sorted(ref for ref, part in self.parts.items()
-                           if part.lib_id not in COMPONENT_FREE_LIBS)
+                           if part.lib_id not in allowed)
         if offenders:
             raise AssertionError(
-                f"{offenders} are not connectors, mounting holes or the "
-                f"grounding pad -- see NO_COMPONENTS")
+                f"{offenders} are not permitted on the {self.variant} board "
+                f"-- see NO_COMPONENTS and DIRECT_ALLOWED_LIBS")
+        if self.variant == "direct":
+            extra = sorted(ref for ref, part in self.parts.items()
+                           if part.lib_id not in COMPONENT_FREE_LIBS)
+            if extra != ["C1", "F1"]:
+                raise AssertionError(
+                    f"the direct board carries {extra}, and the allowance is "
+                    f"exactly ['C1', 'F1'] -- a third part means the "
+                    f"series/shunt argument in DIRECT_ALLOWED_LIBS has been "
+                    f"stretched rather than met")
 
     def check_against_cycfi(self):
         """The two pin maps, checked against the transcribed Cycfi tables.
@@ -293,21 +469,58 @@ class Design:
         """
         owner = self.pin_owner()
 
-        # -- the breakout end: J1 must be J3, pin for pin ------------------
-        for pin, net in BREAKOUT_J3.items():
-            found = owner.get(("J1", str(pin)))
-            if pin in BREAKOUT_UNUSED:
-                if found is not None:
+        if self.variant == "breakout":
+            # -- the breakout end: J1 must be J3, pin for pin --------------
+            for pin, net in BREAKOUT_J3.items():
+                found = owner.get(("J1", str(pin)))
+                if pin in BREAKOUT_UNUSED:
+                    if found is not None:
+                        raise AssertionError(
+                            f"J1.{pin} is on {found}, but breakout J3.{pin} "
+                            f"is {net}, which is shared with J4 -- it must "
+                            f"stay unconnected, and it is also what makes a "
+                            f"reversed cable harmless. See BREAKOUT_J3")
+                    continue
+                if found != net:
                     raise AssertionError(
-                        f"J1.{pin} is on {found}, but breakout J3.{pin} is "
-                        f"{net}, which is shared with J4 -- it must stay "
-                        f"unconnected, and it is also what makes a reversed "
-                        f"cable harmless. See BREAKOUT_J3")
-                continue
-            if found != net:
+                        f"J1.{pin} is on {found}, breakout J3.{pin} is {net} "
+                        f"-- the cable is one-to-one, so these must be "
+                        f"identical")
+        else:
+            # -- the jack end: J10 and J11 must be the breakout's, pin for
+            # pin, because the loom that plugs into them is unchanged ------
+            for ref, table in (("J10", JACK_J10), ("J11", JACK_J11)):
+                for pin, net in table.items():
+                    found = owner.get((ref, str(pin)))
+                    if pin in JACK_UNUSED[ref]:
+                        if found is not None:
+                            raise AssertionError(
+                                f"{ref}.{pin} is on {found}, but this hub "
+                                f"carries six channels and {net} is not one "
+                                f"of them -- driving it would contend with "
+                                f"whatever else is on the jack. See "
+                                f"JACK_UNUSED")
+                        continue
+                    if found != net:
+                        raise AssertionError(
+                            f"{ref}.{pin} is on {found}, the breakout has "
+                            f"{net} there -- the loom is one-to-one, so these "
+                            f"must be identical. See JACK_J10")
+
+            # V+ must reach the capsules through F1 and not around it. A
+            # spur from VIN straight to a power header would pass every other
+            # check here: the nets would still be named right and every pin
+            # would still be on one.
+            if owner.get(("F1", "1")) != "VIN" or owner.get(("F1", "2")) != "V+":
                 raise AssertionError(
-                    f"J1.{pin} is on {found}, breakout J3.{pin} is {net} -- "
-                    f"the cable is one-to-one, so these must be identical")
+                    f"F1 is not in series between VIN and V+ "
+                    f"({owner.get(('F1', '1'))} -> {owner.get(('F1', '2'))}) "
+                    f"-- the capsule supply must pass through it")
+            for pin in ("7", "8"):
+                if owner.get(("J11", pin)) != "VIN":
+                    raise AssertionError(
+                        f"J11.{pin} is not on VIN, so the supply does not "
+                        f"enter through the jack")
 
         # -- the capsule end: every header must mirror H2 and H1 -----------
         for index in range(1, CHANNELS + 1):
@@ -338,6 +551,54 @@ def breakout_connector(design):
         if pin in BREAKOUT_UNUSED:
             continue
         design.connect(net, ("J1", pin))
+
+
+def jack_connectors(design):
+    """J10 and J11: the two 2x5s the instrument's 19-pin loom plugs into.
+
+    Both are present even though J11 carries no channel this board drives,
+    because the loom is Cycfi's and its two housings are a fixed pair. J11 is
+    here for VIN and two of the three grounds; its six channel positions stay
+    empty, as do three of J10's.
+    """
+    for ref, table, note in (("J10", JACK_J10, "channels 1-6 and a ground"),
+                             ("J11", JACK_J11, "VIN and two grounds")):
+        design.add(Part(ref, f"JACK {ref[1:]}",
+                        "Connector_Generic:Conn_02x05_Odd_Even", FP_2X5,
+                        description=f"2x5 2.00mm to the 19-pin output jack "
+                                    f"loom -- {note}; wired one-to-one with "
+                                    f"the breakout's {ref}"))
+        for pin, net in table.items():
+            if pin in JACK_UNUSED[ref]:
+                continue
+            design.connect(net, (ref, pin))
+
+
+def power_conditioning(design):
+    """The two parts on the board, and the only two permitted.
+
+    VIN arrives from the jack, passes through F1, and leaves as V+ to the six
+    capsule power headers. There is no regulator: Cycfi deleted theirs in
+    breakout v2.6 because the Nu capsules run anywhere from 5 V to 18 V, so
+    there is nothing here to regulate *to*.
+
+    F1's hold current is the one number with a decision in it. Cycfi's 500 mA
+    has to pass aux loads and fifteen channels; six capsules draw about 1 mA
+    each -- a TLV170's quiescent plus roughly 200 uA of tail through the input
+    pair -- so a 500 mA part would trip on nothing this board can do. See
+    docs/DESIGN.md; measure before committing to a value.
+    """
+    design.add(Part("F1", "50mA", "Device:Polyfuse", FP_FUSE,
+                    description="Polyfuse, 50 mA hold -- series protection "
+                                "for the six capsule supplies"))
+    design.connect("VIN", ("F1", 1))
+    design.connect("V+", ("F1", 2))
+
+    design.add(Part("C1", "10uF", "Device:C", FP_CAP,
+                    description="Bulk across V+ at the point power enters the "
+                                "board; not decoupling -- see NO_COMPONENTS"))
+    design.connect("V+", ("C1", 1))
+    design.connect("GND", ("C1", 2))
 
 
 def capsule(design, index):
@@ -408,23 +669,33 @@ def mounting(design):
 
 
 def flags(design):
-    """PWR_FLAGs so ERC knows V+ and GND arrive from the connector.
+    """PWR_FLAGs so ERC knows the rails arrive from a connector.
 
     There is no supply on this board and no part that drives anything, so
-    without these ERC reports the two rails as undriven. They are drawing
+    without these ERC reports the rails as undriven. They are drawing
     annotations, not parts: they carry no footprint and never reach the board.
+
+    The `direct` board needs three rather than two. V+ is not merely arriving
+    from a connector there -- it arrives through F1, and a polyfuse is a
+    passive, so ERC sees nothing driving the far side of it either.
     """
-    for index, net in enumerate(("V+", "GND"), start=1):
+    for index, net in enumerate(PWR_FLAG_RAILS, start=1):
         ref = f"#FLG{index:02d}"
         design.add(Part(ref, "PWR_FLAG", "power:PWR_FLAG", ""))
         design.connect(net, (ref, 1))
 
 
-def build():
-    design = Design()
-    breakout_connector(design)
+def build(variant=None):
+    variant = variant or VARIANT
+    design = Design(variant)
+    if variant == "breakout":
+        breakout_connector(design)
+    else:
+        jack_connectors(design)
     for index in range(1, CHANNELS + 1):
         capsule(design, index)
+    if variant == "direct":
+        power_conditioning(design)
     grounding(design)
     mounting(design)
     flags(design)

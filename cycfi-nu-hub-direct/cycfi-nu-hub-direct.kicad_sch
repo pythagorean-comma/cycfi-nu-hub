@@ -1,0 +1,5706 @@
+(kicad_sch
+	(version 20250610)
+	(generator "cycfi-nu-hub")
+	(generator_version "10.0")
+	(uuid "1f6ebbf8-3660-5de3-865d-e308388bf38e")
+	(paper "A3")
+	(title_block
+		(title "Cycfi Nu hub (direct) -- 6 capsules to the 19-pin jack")
+		(date "2026-08-03")
+		(rev "A")
+		(company "pythagorean-comma")
+	)
+	(lib_symbols
+		(symbol "Connector:TestPoint"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.762)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector_Generic:Conn_01x02"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_01x02_1_1"
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector_Generic:Conn_01x03"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x03"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_01x03_1_1"
+				(rectangle
+					(start -1.27 3.81)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector_Generic:Conn_02x05_Odd_Even"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "J"
+				(at 1.27 7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_02x05_Odd_Even"
+				(at 1.27 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_2x??_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Conn_02x05_Odd_Even_1_1"
+				(rectangle
+					(start -1.27 6.35)
+					(end 3.81 -6.35)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 5.207)
+					(end 0 4.953)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -4.953)
+					(end 0 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 5.207)
+					(end 2.54 4.953)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 2.667)
+					(end 2.54 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 0.127)
+					(end 2.54 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 -2.413)
+					(end 2.54 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 -4.953)
+					(end 2.54 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 5.08 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 5.08 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 2.54 180)
+					(length 3.81)
+					(name "Pin_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "Pin_6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 3.81)
+					(name "Pin_8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -5.08 0)
+					(length 3.81)
+					(name "Pin_9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -5.08 180)
+					(length 3.81)
+					(name "Pin_10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762)
+						(xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762)
+						(xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:Polyfuse"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "F"
+				(at -2.54 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Polyfuse"
+				(at 2.54 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 1.27 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Resettable fuse, polymeric positive temperature coefficient"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "resettable fuse PTC PPTC polyfuse polyswitch"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "*polyfuse* *PTC*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Polyfuse_0_1"
+				(polyline
+					(pts
+						(xy -1.524 2.54)
+						(xy -1.524 1.524)
+						(xy 1.524 -1.524)
+						(xy 1.524 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -0.762 2.54)
+					(end 0.762 -2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54)
+						(xy 0 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Polyfuse_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Mechanical:MountingHole"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "H"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole"
+				(at 0 3.175 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Mounting Hole without connection"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:GND"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts
+						(xy 0 0)
+						(xy 0 -1.27)
+						(xy 1.27 -1.27)
+						(xy 0 -2.54)
+						(xy -1.27 -1.27)
+						(xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:PWR_FLAG"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0)
+						(xy 0 1.27)
+						(xy -1.016 1.905)
+						(xy 0 2.54)
+						(xy 1.016 1.905)
+						(xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(wire
+		(pts
+			(xy 55.88 35.56)
+			(xy 45.72 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "99710e03-80c9-5f9b-b0f0-0ec45963cc6b")
+	)
+	(wire
+		(pts
+			(xy 55.88 38.1)
+			(xy 50.8 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d907936-69f3-57dc-98a7-2ff21680184f")
+	)
+	(wire
+		(pts
+			(xy 55.88 40.64)
+			(xy 50.8 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a145a4ce-428c-5449-98a7-16aa372a9e5c")
+	)
+	(wire
+		(pts
+			(xy 50.8 38.1)
+			(xy 50.8 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d0e0b26-82fc-5f2e-80de-b468314a8a3b")
+	)
+	(wire
+		(pts
+			(xy 106.68 38.1)
+			(xy 96.52 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "340da781-4f2c-5a27-bd3c-610284a886b9")
+	)
+	(wire
+		(pts
+			(xy 106.68 40.64)
+			(xy 99.06 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3b9e0a5-ad25-5f36-ae3e-066917e7a47c")
+	)
+	(wire
+		(pts
+			(xy 99.06 40.64)
+			(xy 99.06 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "490f2df1-7e0e-5351-ac16-7dcfd24475ea")
+	)
+	(wire
+		(pts
+			(xy 55.88 66.04)
+			(xy 45.72 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ca30e1e-984a-57a2-ae6f-2be8d4ab5cb2")
+	)
+	(wire
+		(pts
+			(xy 55.88 68.58)
+			(xy 50.8 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6c203cb-84ea-514f-9afa-271b945774ce")
+	)
+	(wire
+		(pts
+			(xy 55.88 71.12)
+			(xy 50.8 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "afbf1d39-abaf-5b09-b0e2-cd0b6ca2266a")
+	)
+	(wire
+		(pts
+			(xy 50.8 68.58)
+			(xy 50.8 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20ca7079-82f6-5284-a0ab-4551102da2ae")
+	)
+	(wire
+		(pts
+			(xy 106.68 68.58)
+			(xy 96.52 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cce65e20-69ab-528a-9681-7cc19b4faa29")
+	)
+	(wire
+		(pts
+			(xy 106.68 71.12)
+			(xy 99.06 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e17d2bb-98c5-5cce-8a8c-755f6a2f966c")
+	)
+	(wire
+		(pts
+			(xy 99.06 71.12)
+			(xy 99.06 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3e0abd9-9f54-510f-b410-69c31206e999")
+	)
+	(wire
+		(pts
+			(xy 55.88 96.52)
+			(xy 45.72 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9feb702d-eeab-5fc8-b51b-ed2b4596a309")
+	)
+	(wire
+		(pts
+			(xy 55.88 99.06)
+			(xy 50.8 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5fdcdd07-8792-5758-9d85-dc9ecc2c12f8")
+	)
+	(wire
+		(pts
+			(xy 55.88 101.6)
+			(xy 50.8 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e0ff2fe8-4f36-5d72-8a8e-45a034c5f8c1")
+	)
+	(wire
+		(pts
+			(xy 50.8 99.06)
+			(xy 50.8 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a8a37b7-35f4-5ee9-a84e-190fdd67277b")
+	)
+	(wire
+		(pts
+			(xy 106.68 99.06)
+			(xy 96.52 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df48a42f-2b1d-5a30-aebe-7cfaa40f3b86")
+	)
+	(wire
+		(pts
+			(xy 106.68 101.6)
+			(xy 99.06 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20b1d896-843b-5d40-b81d-dec4df00c6c8")
+	)
+	(wire
+		(pts
+			(xy 99.06 101.6)
+			(xy 99.06 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f261d167-e6fb-5d9c-9538-fd48dd778d77")
+	)
+	(wire
+		(pts
+			(xy 55.88 127)
+			(xy 45.72 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5276b6e8-229d-565c-ba68-647b87a5e3e0")
+	)
+	(wire
+		(pts
+			(xy 55.88 129.54)
+			(xy 50.8 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e0b2eafa-1073-5618-8fe2-9564ec135a6b")
+	)
+	(wire
+		(pts
+			(xy 55.88 132.08)
+			(xy 50.8 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf1bdf4e-4569-53de-8dd8-ec263dbbd0ae")
+	)
+	(wire
+		(pts
+			(xy 50.8 129.54)
+			(xy 50.8 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e339b35d-dda2-5444-9d48-4e8ff1fe4b16")
+	)
+	(wire
+		(pts
+			(xy 106.68 129.54)
+			(xy 96.52 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "766316dc-f1ec-5eeb-a64f-4327b3bf54e9")
+	)
+	(wire
+		(pts
+			(xy 106.68 132.08)
+			(xy 99.06 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e2aa91f-f501-5b1f-8ce8-a8ed28daba64")
+	)
+	(wire
+		(pts
+			(xy 99.06 132.08)
+			(xy 99.06 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3af703d5-157d-519d-8f1b-83795153f2b9")
+	)
+	(wire
+		(pts
+			(xy 55.88 157.48)
+			(xy 45.72 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f3f2841f-9190-5130-8fb5-c7ae01ffd567")
+	)
+	(wire
+		(pts
+			(xy 55.88 160.02)
+			(xy 50.8 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4f94e9f5-40e7-5093-93f6-e3cc276a8591")
+	)
+	(wire
+		(pts
+			(xy 55.88 162.56)
+			(xy 50.8 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "60819540-ba69-5216-8b97-0e3f86f62d8b")
+	)
+	(wire
+		(pts
+			(xy 50.8 160.02)
+			(xy 50.8 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b82aa59-3913-5c76-bb21-7057d0baaf2c")
+	)
+	(wire
+		(pts
+			(xy 106.68 160.02)
+			(xy 96.52 160.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0840569d-186d-5074-a0a3-ccb9abf3b0c1")
+	)
+	(wire
+		(pts
+			(xy 106.68 162.56)
+			(xy 99.06 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "051bef03-9ee4-5bd4-a4cd-d95c0b6a4823")
+	)
+	(wire
+		(pts
+			(xy 99.06 162.56)
+			(xy 99.06 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48e0939c-1686-5e48-8831-a885e0199bc5")
+	)
+	(wire
+		(pts
+			(xy 55.88 187.96)
+			(xy 45.72 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c0e0180-7867-5df1-a50b-90073bbadc7e")
+	)
+	(wire
+		(pts
+			(xy 55.88 190.5)
+			(xy 50.8 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5934430d-16be-5810-b79b-d0c4ac88c731")
+	)
+	(wire
+		(pts
+			(xy 55.88 193.04)
+			(xy 50.8 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4426a17f-4754-57f9-897b-ebb7ac807656")
+	)
+	(wire
+		(pts
+			(xy 50.8 190.5)
+			(xy 50.8 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6570a40e-edc5-58e2-ad90-946a4c8870c0")
+	)
+	(wire
+		(pts
+			(xy 106.68 190.5)
+			(xy 96.52 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d10cd2e-99f8-5133-bc12-4824202133c5")
+	)
+	(wire
+		(pts
+			(xy 106.68 193.04)
+			(xy 99.06 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b58036d-5c3b-5776-a140-ed950ac6ef76")
+	)
+	(wire
+		(pts
+			(xy 99.06 193.04)
+			(xy 99.06 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "420a43ae-3a3a-5ea9-9d21-2ba4494ff8e0")
+	)
+	(wire
+		(pts
+			(xy 280.67 55.88)
+			(xy 270.51 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49577eec-518b-579a-9c55-8a3db65d2322")
+	)
+	(wire
+		(pts
+			(xy 293.37 55.88)
+			(xy 303.53 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8737bcf-424c-5225-a6cf-a68ae228faf9")
+	)
+	(wire
+		(pts
+			(xy 280.67 58.42)
+			(xy 270.51 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6ebd97b-4b95-51d8-9286-a07495ee6535")
+	)
+	(wire
+		(pts
+			(xy 293.37 58.42)
+			(xy 303.53 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03dd524f-675a-5ad4-b70d-a9e081fe47bd")
+	)
+	(wire
+		(pts
+			(xy 280.67 60.96)
+			(xy 270.51 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd6ed851-6cd4-5515-89b9-251014213022")
+	)
+	(wire
+		(pts
+			(xy 293.37 60.96)
+			(xy 303.53 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b17ffb9e-1baa-56d4-81aa-b56215459273")
+	)
+	(wire
+		(pts
+			(xy 280.67 66.04)
+			(xy 270.51 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39dae0e7-e5de-59bd-b660-c3cd1902e4eb")
+	)
+	(wire
+		(pts
+			(xy 270.51 66.04)
+			(xy 270.51 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20c89650-0c83-575b-a15a-2462c731124f")
+	)
+	(wire
+		(pts
+			(xy 280.67 119.38)
+			(xy 270.51 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8888bfc9-26ca-5216-a4e5-84c91d2288b5")
+	)
+	(wire
+		(pts
+			(xy 293.37 119.38)
+			(xy 303.53 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b92bec07-acea-5688-b37b-688524735e88")
+	)
+	(wire
+		(pts
+			(xy 280.67 121.92)
+			(xy 270.51 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2cee6a0c-a7a5-548d-8919-95247c6ccbf2")
+	)
+	(wire
+		(pts
+			(xy 270.51 121.92)
+			(xy 270.51 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20be6e53-06c3-535f-a134-ab221edb5279")
+	)
+	(wire
+		(pts
+			(xy 293.37 121.92)
+			(xy 298.45 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5730fec-7b7d-5bf1-b82a-52da9f0a3ffd")
+	)
+	(wire
+		(pts
+			(xy 298.45 121.92)
+			(xy 298.45 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2870a38b-376f-5932-8166-a713e6e30405")
+	)
+	(wire
+		(pts
+			(xy 260.35 176.53)
+			(xy 260.35 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f8ac91c-d21d-5fcf-aed1-003cc47eff9a")
+	)
+	(wire
+		(pts
+			(xy 260.35 184.15)
+			(xy 260.35 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "916d2b4c-204a-5bff-b43d-aa8f81fe90d5")
+	)
+	(wire
+		(pts
+			(xy 299.72 176.53)
+			(xy 299.72 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db2b955a-d2da-5d98-b170-19381de673d9")
+	)
+	(wire
+		(pts
+			(xy 299.72 184.15)
+			(xy 299.72 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "015820b2-5e82-556a-acdf-e443ff98caaa")
+	)
+	(wire
+		(pts
+			(xy 45.72 215.9)
+			(xy 45.72 220.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3fae55f4-e8b4-5606-b143-1fccdc491173")
+	)
+	(wire
+		(pts
+			(xy 45.72 241.3)
+			(xy 45.72 246.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4f2f46e5-5a3d-5e2b-8e15-a62e6a2b74f6")
+	)
+	(wire
+		(pts
+			(xy 71.12 241.3)
+			(xy 71.12 246.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22775c65-51ed-5b45-b5df-df5aa8da24a9")
+	)
+	(wire
+		(pts
+			(xy 96.52 241.3)
+			(xy 96.52 246.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0dae9e71-b58c-5ac2-beb6-7ae47ffdf780")
+	)
+	(junction
+		(at 50.8 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "09a0070a-6c44-5c08-bcc4-31189b0d7657")
+	)
+	(junction
+		(at 50.8 71.12)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cec756ef-cb1a-56ae-a1f8-efdba7a2aaad")
+	)
+	(junction
+		(at 50.8 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "60b0db4f-d983-5aa2-9507-0b71a5e5b258")
+	)
+	(junction
+		(at 50.8 132.08)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0c0172a7-e5b2-5fb6-ae53-907fcd74ed12")
+	)
+	(junction
+		(at 50.8 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a9164247-383b-5d01-af78-9a5c2a9cc648")
+	)
+	(junction
+		(at 50.8 193.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d540b4b3-be7a-5e89-a402-4a7883b21c5e")
+	)
+	(no_connect
+		(at 280.67 63.5)
+		(uuid "03b3512d-f0f9-5e68-8817-e64d4a20c3b1")
+	)
+	(no_connect
+		(at 293.37 63.5)
+		(uuid "82256fad-b9ec-5962-bbec-ed3a20862259")
+	)
+	(no_connect
+		(at 293.37 66.04)
+		(uuid "c10ca0d0-f745-5fd8-ad3a-7cb655accc44")
+	)
+	(no_connect
+		(at 280.67 111.76)
+		(uuid "0c65cd05-0119-501e-b224-2c3ab606ffd2")
+	)
+	(no_connect
+		(at 293.37 111.76)
+		(uuid "837f607c-d7cd-5b9f-9ec6-f96af76365b9")
+	)
+	(no_connect
+		(at 280.67 114.3)
+		(uuid "3d6956bc-8519-5c5b-bb53-be730656a9e4")
+	)
+	(no_connect
+		(at 293.37 114.3)
+		(uuid "151bab2a-8881-55ef-af11-775104e0369f")
+	)
+	(no_connect
+		(at 280.67 116.84)
+		(uuid "7c5d8b7f-4746-5c3b-94f5-64c617cdb0f5")
+	)
+	(no_connect
+		(at 293.37 116.84)
+		(uuid "b3e1fe83-8f25-52e0-a03f-036760bd3d0d")
+	)
+	(global_label "V+"
+		(shape input)
+		(at 45.72 35.56 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "955b55ae-d149-5e9a-bb7e-e6a9c042baa5")
+	)
+	(global_label "CH1"
+		(shape input)
+		(at 96.52 38.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a86285c9-cdb5-559e-b067-70243f162fc1")
+	)
+	(global_label "V+"
+		(shape input)
+		(at 45.72 66.04 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b3742b89-ece5-5047-94e7-2617f72ecebb")
+	)
+	(global_label "CH2"
+		(shape input)
+		(at 96.52 68.58 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b0c7cbdb-3833-59ed-878a-a03288937a44")
+	)
+	(global_label "V+"
+		(shape input)
+		(at 45.72 96.52 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "35e6e7f5-6c17-5982-b62b-1a87626a4288")
+	)
+	(global_label "CH3"
+		(shape input)
+		(at 96.52 99.06 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "fa82543e-957f-5129-8f77-4f5a26fe5405")
+	)
+	(global_label "V+"
+		(shape input)
+		(at 45.72 127 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8d17d3b9-0633-55cd-bf9a-ce277d73feb1")
+	)
+	(global_label "CH4"
+		(shape input)
+		(at 96.52 129.54 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1753f49c-e5d8-5261-baaa-950412266b06")
+	)
+	(global_label "V+"
+		(shape input)
+		(at 45.72 157.48 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b050c82b-b629-5245-a2ca-5d174add58d8")
+	)
+	(global_label "CH5"
+		(shape input)
+		(at 96.52 160.02 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "bf6432fe-2834-531c-841a-4d529fca1c6b")
+	)
+	(global_label "V+"
+		(shape input)
+		(at 45.72 187.96 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b36235bd-16d3-551a-8865-e30a6b3df32c")
+	)
+	(global_label "CH6"
+		(shape input)
+		(at 96.52 190.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a51609f4-d186-5542-82d5-f81453e69b1b")
+	)
+	(global_label "CH2"
+		(shape input)
+		(at 270.51 55.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "fbfefb7c-40f8-535d-b03b-1e573f9ea53c")
+	)
+	(global_label "CH1"
+		(shape input)
+		(at 303.53 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "80ac13d4-9c95-5996-adce-2b790bf761d5")
+	)
+	(global_label "CH4"
+		(shape input)
+		(at 270.51 58.42 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c01812b2-af0a-511a-92d0-be2e9148266c")
+	)
+	(global_label "CH3"
+		(shape input)
+		(at 303.53 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9dc805d5-58fa-50d1-ba09-397a17d1f679")
+	)
+	(global_label "CH6"
+		(shape input)
+		(at 270.51 60.96 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "bc197f46-464e-5921-9823-289b3497b7d8")
+	)
+	(global_label "CH5"
+		(shape input)
+		(at 303.53 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2587f902-00ac-57de-9179-69431f3b367a")
+	)
+	(global_label "VIN"
+		(shape input)
+		(at 270.51 119.38 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "273d4af9-829d-50ba-9524-7f5b40f6e6f4")
+	)
+	(global_label "VIN"
+		(shape input)
+		(at 303.53 119.38 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9fd46b84-0bf6-5ae8-9c37-1cd0eb62a6a5")
+	)
+	(global_label "VIN"
+		(shape input)
+		(at 260.35 170.18 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0d11278b-812e-53f5-9b15-e77531a172f4")
+	)
+	(global_label "V+"
+		(shape input)
+		(at 260.35 190.5 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "66b2d7ea-c5f5-524b-bbf3-365e83a20b13")
+	)
+	(global_label "V+"
+		(shape input)
+		(at 299.72 170.18 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a0fd49ad-7283-543a-a353-73d8efbeb044")
+	)
+	(global_label "VIN"
+		(shape input)
+		(at 45.72 246.38 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1d05e503-07d3-54ba-818c-1b71d80e474e")
+	)
+	(global_label "V+"
+		(shape input)
+		(at 71.12 246.38 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "00eebf36-a8aa-5ade-b33f-aacf600d0564")
+	)
+	(text "CH1  low E (6th)"
+		(at 45.72 27.94 0)
+		(effects
+			(font
+				(size 1.6 1.6)
+			)
+			(justify left)
+		)
+		(uuid "47254269-a50e-5b5b-bac6-a67a71a8de2d")
+	)
+	(text "CH2  A (5th)"
+		(at 45.72 58.42 0)
+		(effects
+			(font
+				(size 1.6 1.6)
+			)
+			(justify left)
+		)
+		(uuid "5cb6cd81-919e-566d-8d2d-69ba32a8f5dd")
+	)
+	(text "CH3  D (4th)"
+		(at 45.72 88.9 0)
+		(effects
+			(font
+				(size 1.6 1.6)
+			)
+			(justify left)
+		)
+		(uuid "29fb3c9a-2261-5b53-b3a7-ec15f41c3b93")
+	)
+	(text "CH4  G (3rd)"
+		(at 45.72 119.38 0)
+		(effects
+			(font
+				(size 1.6 1.6)
+			)
+			(justify left)
+		)
+		(uuid "1b72d400-0a81-5a31-a9cd-7d308e07bc26")
+	)
+	(text "CH5  B (2nd)"
+		(at 45.72 149.86 0)
+		(effects
+			(font
+				(size 1.6 1.6)
+			)
+			(justify left)
+		)
+		(uuid "69a1491e-92ec-56ad-a92f-a93b75637fc1")
+	)
+	(text "CH6  high E (1st)"
+		(at 45.72 180.34 0)
+		(effects
+			(font
+				(size 1.6 1.6)
+			)
+			(justify left)
+		)
+		(uuid "577221d3-f5cc-5726-b110-00bdd3a7edcf")
+	)
+	(text "J10 -> 19-pin output jack loom"
+		(at 270.51 45.72 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left)
+		)
+		(uuid "1746ca97-f287-5278-9c25-04dc65cedbee")
+	)
+	(text "channels 1-6, and a ground"
+		(at 270.51 49.53 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "244fd649-cc6f-58a3-a451-659753b073ea")
+	)
+	(text "J11 -> 19-pin output jack loom"
+		(at 270.51 101.6 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left)
+		)
+		(uuid "b06cf440-dfe2-5505-9975-e52c519d8128")
+	)
+	(text "VIN and two grounds"
+		(at 270.51 105.41 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "30e96107-f9f6-524c-b561-c03d608436f7")
+	)
+	(text "Series, not shunt: F1 protects the run it is in."
+		(at 245.11 200.66 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "896b492b-d87c-5a88-abcc-812001435637")
+	)
+	(text "C1 is bulk where power enters the board, not decoupling"
+		(at 245.11 204.47 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "cf31e8c3-2cd4-5335-aa5c-a8edf6a759d0")
+	)
+	(text "at a load -- every capsule carries its own. See design.py."
+		(at 245.11 208.28 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "ea78aeaa-4255-55db-b023-01dfcd3710d7")
+	)
+	(text "Trunk cable screen; cavity foil. See docs/DESIGN.md."
+		(at 53.34 215.9 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "ea674c88-4824-5a08-b112-386ab04f6ef6")
+	)
+	(text "M2 clearance, unplated -- not on GND"
+		(at 151.13 250.19 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "08d3a0cc-0e5b-5a43-87c6-d1b08d24786a")
+	)
+	(text "No supply on this board: every rail arrives on the jack loom."
+		(at 40.64 234.95 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "ce3b3f4d-c787-54d9-8cea-ce3208b1ee9e")
+	)
+	(text "REVERSED J10 SHORTS CH1-6 TO GND"
+		(at 152.4 106.68 0)
+		(effects
+			(font
+				(size 2.2 2.2)
+			)
+			(justify left)
+		)
+		(uuid "7b61a8e3-b3b0-53d4-9bc0-3712ab9a6d71")
+	)
+	(text "Verified against cycfi/nu @ github.com/cycfi/nu -- nu_capsule/nu_preamp.sch and internal_breakout/internal_breakout.sch, silk 'INTERNAL BREAKOUT V2.5'."
+		(at 152.4 111.76 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "6aaea481-9ec5-5b65-947f-b870268d2e9f")
+	)
+	(text "J10, pin for pin against the breakout's own:"
+		(at 152.4 118.11 0)
+		(effects
+			(font
+				(size 1.8 1.8)
+			)
+			(justify left)
+		)
+		(uuid "624df153-55a9-5922-90a6-97768b7d2287")
+	)
+	(text "     1 = CH2"
+		(at 152.4 123.19 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "c39ca5b0-2c3f-5866-bc74-313d5fa739d4")
+	)
+	(text "     2 = CH1"
+		(at 152.4 127 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "6a1a278a-0563-53d8-9c07-2b192712b5af")
+	)
+	(text "     3 = CH4"
+		(at 152.4 130.81 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "415ff67c-a85c-5520-a6bb-5eaccf16130c")
+	)
+	(text "     4 = CH3"
+		(at 152.4 134.62 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "308c7446-e7ed-5d56-858b-a0d5a0f080de")
+	)
+	(text "     5 = CH6"
+		(at 152.4 138.43 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "716314aa-c60e-5b7f-88f7-ea891eb10274")
+	)
+	(text "     6 = CH5"
+		(at 152.4 142.24 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "e1470efb-7360-5f48-9c8d-8bea5789aed5")
+	)
+	(text "     7 = CH8  not fitted (this hub carries six channels)"
+		(at 152.4 146.05 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "260bcab1-09d5-5f5d-99a1-1a2960ad305e")
+	)
+	(text "     8 = CH7  not fitted (this hub carries six channels)"
+		(at 152.4 149.86 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "96e18e5c-9a64-5b34-a2f8-70f7b48c17c4")
+	)
+	(text "     9 = GND"
+		(at 152.4 153.67 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "79d5956b-3f73-5234-a906-8ff7a2884446")
+	)
+	(text "    10 = CH9  not fitted (this hub carries six channels)"
+		(at 152.4 157.48 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "9c3e2f8f-be28-5aaa-9692-b0c234490902")
+	)
+	(text "J11, pin for pin against the breakout's own:"
+		(at 152.4 165.1 0)
+		(effects
+			(font
+				(size 1.8 1.8)
+			)
+			(justify left)
+		)
+		(uuid "bc0e568e-90a0-53aa-939e-a00a67ec5e20")
+	)
+	(text "     1 = CH11  not fitted (this hub carries six channels)"
+		(at 152.4 170.18 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "328803ef-a1d2-51f0-abcd-1ec5dd09f8ec")
+	)
+	(text "     2 = CH10  not fitted (this hub carries six channels)"
+		(at 152.4 173.99 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "aa54be0b-f47a-5653-a7f1-32ab6d12bf1e")
+	)
+	(text "     3 = CH13  not fitted (this hub carries six channels)"
+		(at 152.4 177.8 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "b0f80592-6dec-548b-9bd5-1e4e4eda53df")
+	)
+	(text "     4 = CH12  not fitted (this hub carries six channels)"
+		(at 152.4 181.61 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "c2f5b568-e73c-5654-9ea5-82bbb5b51128")
+	)
+	(text "     5 = CH15  not fitted (this hub carries six channels)"
+		(at 152.4 185.42 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "4cd91e20-7f7f-5a1a-92a3-de2bcfac0f95")
+	)
+	(text "     6 = CH14  not fitted (this hub carries six channels)"
+		(at 152.4 189.23 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "da525c60-c783-5ee8-a024-084cad4d7c6e")
+	)
+	(text "     7 = VIN"
+		(at 152.4 193.04 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "52a4e98b-096f-5f19-9cdb-ab2dda07ffed")
+	)
+	(text "     8 = VIN"
+		(at 152.4 196.85 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "12996605-c61f-5059-a259-8b9209f82a77")
+	)
+	(text "     9 = GND"
+		(at 152.4 200.66 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "be3dae94-173b-5706-a484-75218563fe43")
+	)
+	(text "    10 = GND"
+		(at 152.4 204.47 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "007ddb3e-72da-5094-ab27-c1c6c25dece9")
+	)
+	(text "Reversed, a 2x5 maps pin n to pin 11-n. On J10 that puts"
+		(at 152.4 212.09 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "6bcb5d54-4919-56fb-a731-d4b82d1da587")
+	)
+	(text "pin 2 (CH1) on pin 9 (GND) and shorts the capsule outputs"
+		(at 152.4 215.9 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "357dedbf-cd5c-5879-9790-92121fb384c3")
+	)
+	(text "to ground -- recoverable, but NOT harmless the way a"
+		(at 152.4 219.71 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "f402615d-0082-5840-a74e-3f5200fcbf81")
+	)
+	(text "reversed cable is on the breakout variant. Check first."
+		(at 152.4 223.52 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "f297d298-bf20-5fff-b80a-6af2d3cd5d27")
+	)
+	(text "Two parts, and only two. Each capsule carries its own"
+		(at 152.4 229.87 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "9f823af0-c7ab-57ab-8b31-2c0bb5cee2dc")
+	)
+	(text "100 nF (C1) + 4.7 uF (C2) across VCC1, on the capsule,"
+		(at 152.4 233.68 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "76e34936-814c-5e55-9672-b5d2376f54cc")
+	)
+	(text "and its power pin is Schottky protected on the capsule, so"
+		(at 152.4 237.49 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "c5c02ff3-cd62-54f9-b9d8-f967e44eb6c6")
+	)
+	(text "nothing here is decoupling or reverse protection. F1 is in"
+		(at 152.4 241.3 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "00ca7297-9c9b-57fa-9c72-7f3794861604")
+	)
+	(text "series and C1 is bulk at the point power enters the board."
+		(at 152.4 245.11 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "cd4e3995-43cc-5da9-a42a-2d513598e495")
+	)
+	(text "No regulator: Cycfi deleted theirs in breakout v2.6 because"
+		(at 152.4 251.46 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "68cae979-9d2f-5920-9a64-202e36169559")
+	)
+	(text "the Nu capsules run from 5 V to 18 V. V+ is whatever VIN is."
+		(at 152.4 255.27 0)
+		(effects
+			(font
+				(size 1.4 1.4)
+			)
+			(justify left)
+		)
+		(uuid "ddeca8a1-1652-554f-916e-3747668016a3")
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 60.96 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d35f9d24-c227-591b-88a9-1aa8d492ee7e")
+		(property "Reference" "P1"
+			(at 60.96 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH1 PWR"
+			(at 60.96 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical"
+			(at 60.96 38.1 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 1, low E (6th) -- power, to capsule H2: 1=V+, 2=GND, 3=GND"
+			(at 60.96 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ba754592-717a-5db0-9101-5e643b3b074c")
+		)
+		(pin "2"
+			(uuid "feaf4f91-10fe-58ad-9040-06b423c87a19")
+		)
+		(pin "3"
+			(uuid "c01dded7-f7ff-5988-9be3-368f4d352a69")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "P1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 50.8 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "432b765c-790a-55f5-8d09-ec50ac773a7f")
+		(property "Reference" "#PWR001"
+			(at 50.8 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 50.8 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 50.8 44.45 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 50.8 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "872228fd-e6ea-5fb4-a5f0-c96fc7bddd93")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR001")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 111.76 38.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "efc4fa90-57b4-5e44-9ec1-8ef7cee3662a")
+		(property "Reference" "S1"
+			(at 111.76 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH1 SIG"
+			(at 111.76 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
+			(at 111.76 38.1 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 1, low E (6th) -- signal, to capsule H1: 1=OUT, 2=GND"
+			(at 111.76 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cf0e2c2e-83b8-518f-97fb-c23aa7700114")
+		)
+		(pin "2"
+			(uuid "c86a7e02-f955-5351-8213-04735b2f824c")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "S1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 99.06 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dc73a671-aba1-5930-b553-1cab74def673")
+		(property "Reference" "#PWR002"
+			(at 99.06 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 99.06 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 44.45 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 99.06 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d437da4d-0bee-5b4a-9ae6-18c325c3f5b9")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR002")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 60.96 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b7b7ebb7-854e-53f9-a575-31e89b9e2e02")
+		(property "Reference" "P2"
+			(at 60.96 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH2 PWR"
+			(at 60.96 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical"
+			(at 60.96 68.58 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 2, A (5th) -- power, to capsule H2: 1=V+, 2=GND, 3=GND"
+			(at 60.96 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a3481372-6d50-5157-95ad-ae40fdb6036b")
+		)
+		(pin "2"
+			(uuid "923611a8-4c79-5b5a-8acf-39c3bb2b40b5")
+		)
+		(pin "3"
+			(uuid "b4a9f450-5b5a-5cc6-b0bb-3d92507a5ebf")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "P2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 50.8 74.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3f8fdca8-a079-50eb-a5ef-86ee1917cbe6")
+		(property "Reference" "#PWR003"
+			(at 50.8 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 50.8 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 50.8 74.93 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 50.8 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4b3de7a5-fc18-581e-93d1-23cd1e1fc330")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR003")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 111.76 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "82da4e03-757d-50dc-b24c-e196f871e272")
+		(property "Reference" "S2"
+			(at 111.76 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH2 SIG"
+			(at 111.76 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
+			(at 111.76 68.58 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 2, A (5th) -- signal, to capsule H1: 1=OUT, 2=GND"
+			(at 111.76 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5ef92e68-aab2-57e0-bcbe-eab41f54a30a")
+		)
+		(pin "2"
+			(uuid "ba7921e5-83df-5e01-bb1d-5c9cb18dd3d9")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "S2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 99.06 74.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dc2032cd-5772-5f0c-a7c5-ed135f297376")
+		(property "Reference" "#PWR004"
+			(at 99.06 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 99.06 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 74.93 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 99.06 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "71acd0b7-ec4a-54e4-9a1f-a3b594938467")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR004")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 60.96 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "42f68606-4364-5a85-b1bf-72fda5e8dec7")
+		(property "Reference" "P3"
+			(at 60.96 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH3 PWR"
+			(at 60.96 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical"
+			(at 60.96 99.06 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 3, D (4th) -- power, to capsule H2: 1=V+, 2=GND, 3=GND"
+			(at 60.96 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bafaca41-815c-572e-87f8-ef2d44c26507")
+		)
+		(pin "2"
+			(uuid "6947993b-7dcc-5343-9b3a-2eb11c1939d2")
+		)
+		(pin "3"
+			(uuid "b39b0500-3423-53cc-acf7-8dc141b92439")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "P3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 50.8 105.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "64d5e7b5-9c93-563e-8b03-7ed1c320dd32")
+		(property "Reference" "#PWR005"
+			(at 50.8 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 50.8 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 50.8 105.41 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 50.8 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "14e7d99f-2879-52bd-ae4b-e99e118eca34")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR005")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 111.76 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b979796e-0e80-5d78-85f4-f66a1d134329")
+		(property "Reference" "S3"
+			(at 111.76 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH3 SIG"
+			(at 111.76 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
+			(at 111.76 99.06 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 3, D (4th) -- signal, to capsule H1: 1=OUT, 2=GND"
+			(at 111.76 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f00bd720-8de8-54eb-8c68-89cc001dd57b")
+		)
+		(pin "2"
+			(uuid "918ae7d1-3894-5e7e-bb6a-71def420999a")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "S3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 99.06 105.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "936a6f37-71db-5ddf-b999-fe4957bf689e")
+		(property "Reference" "#PWR006"
+			(at 99.06 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 99.06 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 105.41 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 99.06 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f82f2ae5-ba41-5092-9fa3-b5b3fdf6b609")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR006")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 60.96 129.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "facc714f-8dfa-57ed-91c8-7863d105168a")
+		(property "Reference" "P4"
+			(at 60.96 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH4 PWR"
+			(at 60.96 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical"
+			(at 60.96 129.54 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 4, G (3rd) -- power, to capsule H2: 1=V+, 2=GND, 3=GND"
+			(at 60.96 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ccdc9653-1d87-583f-8739-fbd8df46a6e1")
+		)
+		(pin "2"
+			(uuid "9a03c9fe-1bf7-5a61-8e9b-7c5b991c3869")
+		)
+		(pin "3"
+			(uuid "22b58a67-6594-53b2-8f4c-e60c437982ce")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "P4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 50.8 135.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e23a695e-51aa-5d42-a921-2e5c722793ca")
+		(property "Reference" "#PWR007"
+			(at 50.8 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 50.8 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 50.8 135.89 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 50.8 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1fb7f94f-31bf-5a13-ae35-7c886c517cdb")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR007")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 111.76 129.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "615d31c7-4f44-5484-82db-691c505827d2")
+		(property "Reference" "S4"
+			(at 111.76 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH4 SIG"
+			(at 111.76 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
+			(at 111.76 129.54 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 4, G (3rd) -- signal, to capsule H1: 1=OUT, 2=GND"
+			(at 111.76 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f850cab7-2fa3-5132-b3c4-104493b3e4fb")
+		)
+		(pin "2"
+			(uuid "20203367-bafc-5b2d-9755-7596bc5908da")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "S4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 99.06 135.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e69f3b5b-c384-57f6-a4b3-caaad005840d")
+		(property "Reference" "#PWR008"
+			(at 99.06 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 99.06 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 135.89 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 99.06 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "eeb6db65-81d3-58ea-b42c-b052af8c8cb0")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR008")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 60.96 160.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "71753335-7c5e-5673-bc08-03d145830be6")
+		(property "Reference" "P5"
+			(at 60.96 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH5 PWR"
+			(at 60.96 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical"
+			(at 60.96 160.02 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 5, B (2nd) -- power, to capsule H2: 1=V+, 2=GND, 3=GND"
+			(at 60.96 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d969611d-f017-550f-ae99-27bbbb19d6f9")
+		)
+		(pin "2"
+			(uuid "fb353143-367a-5e09-8f33-d235fe8ea35e")
+		)
+		(pin "3"
+			(uuid "98acf97d-5346-5179-95dd-caf57d93403e")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "P5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 50.8 166.37 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a1e75c88-064e-53bc-9afa-c30beedbca14")
+		(property "Reference" "#PWR009"
+			(at 50.8 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 50.8 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 50.8 166.37 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 50.8 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1863f087-0ca3-5d2f-8025-e0a35c1f8350")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR009")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 111.76 160.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2c3f1657-91bf-5964-8fd4-cbf0a9a372b0")
+		(property "Reference" "S5"
+			(at 111.76 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH5 SIG"
+			(at 111.76 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
+			(at 111.76 160.02 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 5, B (2nd) -- signal, to capsule H1: 1=OUT, 2=GND"
+			(at 111.76 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cb016535-85bc-54a3-ae08-9058014e79fa")
+		)
+		(pin "2"
+			(uuid "2ef2cf22-aa4d-5b21-9687-4c063fdb19de")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "S5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 99.06 166.37 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d912ec04-a599-5337-bc21-7879cfded114")
+		(property "Reference" "#PWR010"
+			(at 99.06 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 99.06 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 166.37 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 99.06 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f72ad60e-a93d-507b-a9b1-fb267fe20611")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 60.96 190.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "27ea88f6-0f76-59ac-96b5-0551bbaab418")
+		(property "Reference" "P6"
+			(at 60.96 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH6 PWR"
+			(at 60.96 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x03_P2.00mm_Vertical"
+			(at 60.96 190.5 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 6, high E (1st) -- power, to capsule H2: 1=V+, 2=GND, 3=GND"
+			(at 60.96 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "beea6e55-2d38-5d7e-a3e5-d0fbc4ec5721")
+		)
+		(pin "2"
+			(uuid "8db2cc20-571c-585f-938b-eb1abf8ada1d")
+		)
+		(pin "3"
+			(uuid "63dbbf90-b834-58de-bceb-323ea00928be")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "P6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 50.8 196.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "33b6cc98-40e7-5309-943f-2083a9b56a6f")
+		(property "Reference" "#PWR011"
+			(at 50.8 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 50.8 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 50.8 196.85 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 50.8 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e4d65193-07b6-580c-8612-cb360c59f127")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR011")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 111.76 190.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8ca68895-cff4-5ba1-86e1-34ac7ad683a6")
+		(property "Reference" "S6"
+			(at 111.76 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CH6 SIG"
+			(at 111.76 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_1x02_P2.00mm_Vertical"
+			(at 111.76 190.5 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Capsule 6, high E (1st) -- signal, to capsule H1: 1=OUT, 2=GND"
+			(at 111.76 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3c327c08-1686-5324-94c3-db2b149e756d")
+		)
+		(pin "2"
+			(uuid "e22fb4b4-3c27-51e0-9a67-4dfd0efa7794")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "S6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 99.06 196.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b8a38669-5072-59d3-9a9c-35252889e1db")
+		(property "Reference" "#PWR012"
+			(at 99.06 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 99.06 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 196.85 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 99.06 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d13cbd91-4091-50ff-8960-d1de266a5c0c")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR012")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_02x05_Odd_Even")
+		(at 285.75 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8c60faa5-c30d-55a9-b500-a35eaa2f05cc")
+		(property "Reference" "J10"
+			(at 285.75 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "JACK 10"
+			(at 285.75 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_2x05_P2.00mm_Vertical"
+			(at 285.75 60.96 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 285.75 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2x5 2.00mm to the 19-pin output jack loom -- channels 1-6 and a ground; wired one-to-one with the breakout's J10"
+			(at 285.75 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "505b99cd-59a3-5358-ba9e-d4b02defcd7d")
+		)
+		(pin "2"
+			(uuid "e3c0186a-a012-5534-885d-177a71e4787e")
+		)
+		(pin "3"
+			(uuid "3a1dfa74-dd94-52ae-8b57-50551af5cb4d")
+		)
+		(pin "4"
+			(uuid "72b3dd15-4ba6-5736-92b0-f161bc79b714")
+		)
+		(pin "5"
+			(uuid "587b37f9-df36-5339-abb2-fd891991743d")
+		)
+		(pin "6"
+			(uuid "72000715-23a3-5962-a2cf-7e7eb529814f")
+		)
+		(pin "7"
+			(uuid "91bbf8db-59bd-54dc-9766-cf16c1f48ed5")
+		)
+		(pin "8"
+			(uuid "ddbd1c5f-d272-5c45-b416-4e582bc761b6")
+		)
+		(pin "9"
+			(uuid "6dd08d55-e3b9-5cf6-8d28-04be4b45fb1b")
+		)
+		(pin "10"
+			(uuid "e25877c6-b50c-5ea1-bf74-9f7462c46c74")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "J10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 270.51 72.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "584ba6e7-a92c-5ec1-b2a1-d84ed5ca7c37")
+		(property "Reference" "#PWR013"
+			(at 270.51 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 270.51 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 270.51 72.39 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 270.51 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "942256bf-6891-519f-92d5-7c612ceea4f0")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_02x05_Odd_Even")
+		(at 285.75 116.84 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7c0eda01-0fe0-52cb-a07e-5a526cbaed3d")
+		(property "Reference" "J11"
+			(at 285.75 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "JACK 11"
+			(at 285.75 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.00mm:PinHeader_2x05_P2.00mm_Vertical"
+			(at 285.75 116.84 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 285.75 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "2x5 2.00mm to the 19-pin output jack loom -- VIN and two grounds; wired one-to-one with the breakout's J11"
+			(at 285.75 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "615b70a2-b612-5d4d-a205-071e15d9ff4c")
+		)
+		(pin "2"
+			(uuid "f8ac8e99-8ee0-5925-aa87-773924a4f901")
+		)
+		(pin "3"
+			(uuid "8a190b3e-9ee7-5ef2-af05-6daecb7ffacc")
+		)
+		(pin "4"
+			(uuid "2d024a94-ccc3-56ca-847a-9df90e5119d9")
+		)
+		(pin "5"
+			(uuid "bde4eaaf-c158-5cdd-a9e7-6fbd43b1548a")
+		)
+		(pin "6"
+			(uuid "866960da-4c9f-5ef8-8d2c-2461a8b0fb5e")
+		)
+		(pin "7"
+			(uuid "210e5517-ba4d-5b86-bba5-dfa74228f96b")
+		)
+		(pin "8"
+			(uuid "e545c7d2-75f8-5272-b0c8-2972de038909")
+		)
+		(pin "9"
+			(uuid "693b5d50-585e-5d88-9a28-cfb06fc665f0")
+		)
+		(pin "10"
+			(uuid "c4a6bd9a-9467-58ef-8f90-9e452987da9e")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "J11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 270.51 128.27 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "540703ec-4ae4-5385-9e4d-49b9201074be")
+		(property "Reference" "#PWR014"
+			(at 270.51 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 270.51 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 270.51 128.27 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 270.51 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ab79d02a-28bc-5ade-a8a4-3b375229bd90")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR014")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 298.45 128.27 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2ad14294-c33a-5bd2-a4e7-f5bfef74322f")
+		(property "Reference" "#PWR015"
+			(at 298.45 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 298.45 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 298.45 128.27 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 298.45 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c26b3490-a111-558d-ae1c-d70d1d0f871f")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR015")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Polyfuse")
+		(at 260.35 180.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "61be4171-1285-5411-b096-13664cf0c382")
+		(property "Reference" "F1"
+			(at 260.35 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "50mA"
+			(at 260.35 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Fuse:Fuse_0805_2012Metric"
+			(at 260.35 180.34 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 260.35 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Polyfuse, 50 mA hold -- series protection for the six capsule supplies"
+			(at 260.35 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "801006cc-72a4-5700-af45-7970c767f62a")
+		)
+		(pin "2"
+			(uuid "13622b96-45b9-5111-a71f-a07d704c8607")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "F1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 299.72 180.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "55b0f223-6eaa-556c-9e86-4f60481eba49")
+		(property "Reference" "C1"
+			(at 299.72 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10uF"
+			(at 299.72 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 299.72 180.34 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 299.72 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Bulk across V+ at the point power enters the board; not decoupling -- see NO_COMPONENTS"
+			(at 299.72 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "29b30bc1-635b-51fb-b598-f6590e70ad79")
+		)
+		(pin "2"
+			(uuid "1262975c-6d91-5284-8528-71a32c5e3f66")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 299.72 187.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c85fbe03-92bd-57fc-82c4-ee96718baf7c")
+		(property "Reference" "#PWR016"
+			(at 299.72 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 299.72 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 299.72 187.96 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 299.72 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0d5bb859-6f8a-5cd3-9400-2f5af2042385")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR016")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 45.72 215.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "71215ea2-b513-58bb-a81d-a8a55b569058")
+		(property "Reference" "E1"
+			(at 45.72 209.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SHIELD/GND"
+			(at 45.72 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_THTPad_2.0x2.0mm_Drill1.0mm"
+			(at 45.72 215.9 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 45.72 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Solder pad to GND: trunk cable screen, cavity foil, optionally bridge earth"
+			(at 45.72 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d7f6010a-c913-532d-9d1c-509fd5fbcb96")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "E1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 45.72 220.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a619f441-5ee4-5711-b4a8-e3c5f6ebca13")
+		(property "Reference" "#PWR017"
+			(at 45.72 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 45.72 227.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 220.98 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 45.72 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7b0f6208-7862-5c45-9b12-d41fda8a178e")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR017")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 152.4 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e88898ef-9107-535c-aef8-f2be7d5ebb7a")
+		(property "Reference" "H1"
+			(at 152.4 234.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "M2"
+			(at 152.4 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
+			(at 152.4 241.3 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 152.4 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "M2 clearance hole, unplated"
+			(at 152.4 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 165.1 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d73f5d70-ba43-5fcd-b687-c3879c6e42b2")
+		(property "Reference" "H2"
+			(at 165.1 234.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "M2"
+			(at 165.1 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
+			(at 165.1 241.3 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 165.1 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "M2 clearance hole, unplated"
+			(at 165.1 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "H2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 45.72 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f7e62483-f60f-5632-9dc8-b46a5cdd7d05")
+		(property "Reference" "#FLG01"
+			(at 45.72 234.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 45.72 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 241.3 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 45.72 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "64dd3193-db27-558a-9e6b-84ddcf29a0ab")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#FLG01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 71.12 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f9c04737-f803-5c86-a40e-7bcc267203eb")
+		(property "Reference" "#FLG02"
+			(at 71.12 234.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 71.12 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 71.12 241.3 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 71.12 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6b625a6c-ae44-5f13-a890-c1b0122ca410")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#FLG02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 96.52 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "457969c8-e5c8-5363-8705-6fc94fb17499")
+		(property "Reference" "#FLG03"
+			(at 96.52 234.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 96.52 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 96.52 241.3 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 96.52 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "52263e41-169c-5137-a753-98cd1e1acc19")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#FLG03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 96.52 246.38 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "210c6437-27c8-5395-9371-f811f7d82259")
+		(property "Reference" "#PWR018"
+			(at 96.52 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 96.52 252.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 96.52 246.38 0)
+			(effects
+				(font
+					(size 0.762 0.762)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 96.52 246.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ed550728-9f0e-5616-833d-249e0963aa76")
+		)
+		(instances
+			(project "cycfi-nu-hub-direct"
+				(path "/1f6ebbf8-3660-5de3-865d-e308388bf38e"
+					(reference "#PWR018")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

@@ -185,9 +185,9 @@ def check_annotations(schematic, board):
     """
     problems = []
     for name, path in (("schematic", schematic), ("board", board)):
-        if circuit.SILK_NOTE not in path.read_text():
-            problems.append(f"{name} does not carry the cable note "
-                            f"{circuit.SILK_NOTE!r}")
+        if circuit.BOARD_NOTE not in path.read_text():
+            problems.append(f"{name} does not carry the board's warning "
+                            f"{circuit.BOARD_NOTE!r}")
     if circuit.CYCFI_SOURCE not in schematic.read_text():
         problems.append("the schematic does not say which Cycfi sources the "
                         "pin map came from")
@@ -435,7 +435,10 @@ def check_order_figures(board, order):
                    figures["plated"])
     compare_figure(r"(\d+) unplated holes at ([\d.]+) mm", "unplated holes",
                    figures["unplated"], figures["unplated_drill"])
-    compare_figure(r"\*\*(\d+) placements\*\*, all through-hole",
+    # Just the count. It used to also require the words "all through-hole",
+    # which was true of the only board that existed then and is not true of
+    # the direct variant's two 0805 parts.
+    compare_figure(r"\*\*(\d+) placements\*\*",
                    "placement count", figures["placements"])
 
     # The design rules come from rules.py, which gen_project.py writes into
@@ -529,7 +532,11 @@ def main():
     problems += check_annotations(schematic, board)
     problems += check_project_rules(
         here / circuit.PROJECT / f"{circuit.PROJECT}.kicad_pro")
-    problems += check_order_figures(board, here / "fab" / "ORDER.md")
+    # Each board gets its own ORDER.md, because the figures in it are asserted
+    # against the board and no two of them agree.
+    order = ("ORDER.md" if circuit.VARIANT == "breakout"
+             else f"ORDER-{circuit.VARIANT}.md")
+    problems += check_order_figures(board, here / "fab" / order)
     problems += check_mechanical(
         board, here / "fab" / f"{circuit.PROJECT}-mechanical.json")
     if problems:
@@ -545,12 +552,13 @@ def main():
           f"{gen_project.VIA_DIAMETER}/{gen_project.VIA_DRILL}mm vias, "
           f"{gen_project.CLEARANCE}mm clearance")
     figures = board_figures(board)
-    print(f"fab/ORDER.md still describes this board: "
+    print(f"fab/{order} still describes this board: "
           f"{figures['width']} x {figures['height']}mm, "
           f"{figures['layers']} layers, {figures['placements']} placements, "
           f"{figures['plated']} plated and {figures['unplated']} unplated holes")
     print(f"mechanical interface matches: {figures['placements']} placements "
-          f"and 4 holes, in a stated axis convention")
+          f"and {len(circuit.MOUNTING_HOLES)} holes, in a stated axis "
+          f"convention")
     return 0
 
 

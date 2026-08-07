@@ -189,7 +189,7 @@ fp-info-cache
 # every run, and cycfi-nu-hub-pcbway.zip beside it holds byte-identical
 # content -- so tracking both means ~1100 lines of churn per build for a
 # second copy of the same thing. The zip is the deliverable; this is scratch.
-fab/pcbway/
+fab/*-pcbway/
 
 # JetBrains module file. Per-user editor state, not part of the design.
 *.iml

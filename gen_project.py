@@ -36,7 +36,7 @@ VIA_DRILL = rules.VIA_DRILL
 # symbol, so ERC and verify.py both pass and the fault only appears as a
 # broken library link when a human opens the project.
 STOCK_SYMBOL_LIBS = frozenset({"Connector_Generic", "Connector", "Mechanical",
-                               "power"})
+                               "power", "Device"})
 assert {nick for nick, _, _, _ in circuit.LIBS.values()} <= STOCK_SYMBOL_LIBS, (
     "circuit.LIBS has a nickname that is not a stock KiCad library; this "
     "project has no .kicad_sym of its own to put it in")

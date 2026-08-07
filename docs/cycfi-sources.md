@@ -64,6 +64,62 @@ Two differences worth recording:
   breakout outline in existence is the 50 × 35 mm one in the Eagle files
   below.
 
+## The 19-pin output jack — `internal_breakout.sch`, J10 and J11
+
+Read out of the same Eagle sources as everything else here, and the basis of
+the `direct` board variant. Two 2×5 headers carry the jack: twenty positions
+for a nineteen-pin connector, one spare.
+
+| | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **J10** | CH2 | CH1 | CH4 | CH3 | CH6 | CH5 | CH8 | CH7 | GND | CH9 |
+| **J11** | CH11 | CH10 | CH13 | CH12 | CH15 | CH14 | VIN | VIN | GND | GND |
+
+Numbered in pairs across the rows, the same convention as J3.
+
+**What is between the Nu Multi input and the jack is nothing.** Every channel
+net in the file has exactly two pins on it:
+
+```
+CH1  ( 2)  J10.2, J3.7          CH4  ( 2)  J10.3, J3.6
+CH2  ( 2)  J10.1, J3.8          CH5  ( 2)  J10.6, J3.3
+CH3  ( 2)  J10.4, J3.5          CH6  ( 2)  J10.5, J3.4
+```
+
+No buffer, no filter, no protection — the breakout joins them with copper.
+That is the whole reason a hub can replace it for audio.
+
+The only active content on the path is the supply: `VIN` enters on J11.7/8,
+passes a P-channel MOSFET (`Q1`, gate to ground — reverse-polarity
+protection), a ferrite bead (`FB1`) and an LP2985 regulator (`U1`), with `J14`
+— silk `PWR SELECT` — choosing between regulated and unregulated for `V+`.
+
+**None of that survived into v2.6.** Cycfi's
+[redesign note](https://www.cycfi.com/2023/04/internal-breakout-redesign/) says
+the 10 V regulator was removed outright because "the Nu pickups can operate
+from 5 V to 18 V", replaced by 200 mA current limiting and a 500 mA-hold
+polyfuse, with a separate 5 V auxiliary regulator added for control circuits.
+So the LDO and the `PWR SELECT` jumper above are a dead end: there is nothing
+there for a replacement board to reproduce.
+
+To re-extract the table:
+
+```bash
+python3 - <<'EOF'
+import xml.etree.ElementTree as ET
+from collections import defaultdict
+sheet = ET.parse('internal_breakout.sch').getroot().find(
+    './drawing/schematic/sheets/sheet')
+nets = defaultdict(list)
+for n in sheet.find('nets'):
+    for seg in n:
+        for pr in seg.findall('pinref'):
+            nets[n.get('name')].append(f"{pr.get('part')}.{pr.get('pin')}")
+for name in sorted(nets):
+    print(f"{name:8s} {', '.join(sorted(set(nets[name])))}")
+EOF
+```
+
 The rest of this document is the v2.5 Eagle extraction, unchanged.
 
 ## The capsule — `nu_capsule/nu_preamp.sch`

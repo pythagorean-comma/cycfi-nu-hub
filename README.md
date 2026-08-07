@@ -31,6 +31,25 @@ That regenerates schematic *and* board, runs ERC, checks both against
 when DRC is clean**, so a board with known faults cannot reach a fab by
 accident.
 
+## Two boards
+
+There is a second variant that **deletes the Internal Breakout entirely** and
+drives the instrument's 19-pin output jack itself — 35 × 24.5 mm, half the
+area, one polyfuse and one capacitor:
+
+```bash
+./build.sh direct
+```
+
+The capsule end of both boards is identical; only what the six channels arrive
+at differs. The generators are shared and `design.VARIANT` picks between them.
+
+**Order the default one.** The direct variant assumes the v2.6 breakout
+presents its jack on the same two 2×5 headers v2.5 does, and nobody has
+checked that against hardware. [`docs/DESIGN.md`](docs/DESIGN.md) has the
+evidence, the two components' justification, and the one safety property that
+regresses.
+
 > **Anything changed in the KiCad GUI is destroyed by the next build.** Use the
 > editor to inspect, measure and try things out; changes that should survive
 > belong in the generator.

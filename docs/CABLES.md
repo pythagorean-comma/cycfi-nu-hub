@@ -27,6 +27,19 @@ Two cables per capsule and not one, because the capsule has two connectors: a
 other. The hub mirrors that — `P1`–`P6` along its south edge, `S1`–`S6` along
 its north edge, same channel in the same column.
 
+> **If you are building the `direct` variant**, cables 1 and 2 below are
+> unchanged — twelve capsule cables, same parts, same tables. Cable 3 does not
+> exist: there is no hub → breakout run, because there is no breakout. The
+> hub's `J10` and `J11` present the same two 2×5 headers the breakout does, so
+> the instrument's existing 19-pin jack loom plugs straight into it.
+>
+> Two differences that matter at the bench. **Pin 1 is the north pad on every
+> header** on that board, not the west one — the headers are turned 90° to make
+> it small. And **check the loom's orientation before powering anything**: a
+> reversed J10 shorts the capsule outputs to ground, which is not the harmless
+> failure [Two positions on the 2×5 stay
+> empty](#2-two-positions-on-the-2x5-stay-empty) describes below.
+
 ---
 
 ## Two warnings before you buy anything

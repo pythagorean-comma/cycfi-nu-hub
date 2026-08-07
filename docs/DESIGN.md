@@ -11,6 +11,28 @@ components at all**. It is thirteen connectors, one solder pad, four holes and
 some copper. That is not minimalism for its own sake — see
 [No components](#no-components).
 
+## Two boards
+
+There are two variants in this repository, and the capsule end of both is
+identical. What differs is what the six channels arrive at.
+
+| | `breakout` | `direct` |
+| --- | --- | --- |
+| Goes to | Internal Breakout J3 | the 19-pin output jack |
+| Size | 50 × 35 mm | **35 × 24.5 mm** |
+| Trunk connector | 1 × 2×5 (J1) | 2 × 2×5 (J10, J11) |
+| Components | none | polyfuse + bulk cap |
+| Mounting | 4 × M2 | 2 × M2 |
+| Build | `./build.sh` | `./build.sh direct` |
+
+`design.VARIANT` picks between them; everything downstream follows from it. The
+generators are shared, the layouts are not — see
+[The direct variant](#the-direct-variant).
+
+**The `breakout` board is the one to order** until a v2.6 breakout has been
+measured. The `direct` board rests on an assumption about its jack interface
+that no one has checked against hardware.
+
 ---
 
 ## What this replaces
@@ -287,6 +309,119 @@ which is the property that was being violated each time.
   `rules.MIN_SILK_TEXT` is now the single place that height is declared, so
   the generator and the checker cannot disagree about it again.
 
+## The direct variant
+
+Build it with `./build.sh direct`. It deletes the Internal Breakout from the
+chain and drives the instrument's 19-pin output jack itself.
+
+### Why it works
+
+The breakout, for an installation that uses none of its aux, CV, GK or
+power-select features, is **a wire and a fuse**. Every channel net in Cycfi's
+`internal_breakout.sch` has exactly two pins on it — the Nu Multi input and
+the jack — with no buffer, filter or protection between them.
+[`cycfi-sources.md`](cycfi-sources.md) has the netlist and the full J10/J11
+table.
+
+Three things make replacing it tractable:
+
+- **The jack is two 2×5 headers**, `J10` and `J11`. So the hub does not
+  terminate a nineteen-pin connector; it presents the same two headers, and the
+  instrument's existing loom plugs in unmodified.
+- **There is no regulator to reproduce.** Cycfi deleted theirs in v2.6 because
+  the capsules run from 5 V to 18 V. That also closes the old open question
+  about what voltage six capsules would see: whatever VIN is.
+- **Reverse protection is already at every load** — each capsule has its own
+  Schottky. The breakout's P-FET was protecting the breakout's own regulator.
+
+### Two components, and why the rule bent
+
+`design.NO_COMPONENTS` rejects parts on this board, and the argument is that a
+capacitor here sits a cable's length from every load it could serve. **That
+argument does not cover these two**, and the distinction is
+series-versus-shunt and at-the-source-versus-at-the-load:
+
+- **F1**, a polyfuse, is in *series* with the supply, so what it protects is
+  the run it is in — and it is the only thing between a shorted capsule cable
+  and whatever feeds the jack, because the breakout that used to carry that
+  job is what this variant deletes.
+- **C1** is bulk where power enters the board, not decoupling at a load. Its
+  job is the loom back to the jack, which the capsule's own pair cannot see
+  past.
+
+`check_no_components()` enforces exactly `['C1', 'F1']` on this variant — a
+third part means the argument has been stretched rather than met.
+
+**F1's value is a decision, not a transcription.** Cycfi use 500 mA, but that
+has to pass aux loads and fifteen channels. Six capsules draw roughly 1 mA each
+— a TLV170's quiescent plus about 200 µA of tail through the input pair — so a
+500 mA part would never trip on anything this board can do. 50 mA is the honest
+figure. Measure before committing.
+
+### One safety property regresses
+
+On the breakout board a reversed 2×5 is harmless *by construction*: rotating it
+maps pin *n* to 11−*n*, which lands the two unfitted positions on V+ and GND,
+so the hub simply receives no supply.
+
+That does not survive. On a reversed **J10**, pin 2 (CH1) meets pin 9 (GND) and
+the capsule outputs are shorted to ground — recoverable, since the TLV170
+output is current-limited and sits behind a 10 µF coupling cap, but no longer
+safe by geometry. A reversed **J11** delivers no power, which is benign.
+
+The mitigation is keying, and the housings belong to Cycfi's loom rather than
+to this board, so the silkscreen warns instead: `REVERSED J10 SHORTS CH1-6 TO
+GND`. `verify.check_annotations()` asserts that sentence reached both the
+board and the schematic.
+
+### How it got to 35 × 24.5 mm
+
+With the breakout gone nothing constrains the outline, so the size is a packing
+problem. The dominant lever is header orientation:
+
+- Pins running **along** the row — what the breakout board does — costs
+  **7.0 mm** of courtyard per channel column. Six columns: 42 mm.
+- Pins running **across** costs **3.0 mm** of courtyard, at which point the
+  limit is the mated crimp housing rather than the footprint. Six columns on a
+  5.0 mm pitch: **30 mm**.
+
+Turning the two jack connectors broadside does the same for the height: 11 × 5
+instead of 5 × 11, so the pair sits inside the width the columns already need
+and the middle band is 5 mm tall instead of eleven.
+
+**The 5.0 mm pitch assumes a mated A4B-3S-2C about 4.5 mm across, and that
+figure is inferred, not measured.** The width is linear in it: at 5.0 mm the
+board goes to about 38 mm, at 4.0 mm to about 32. Measuring one housing is the
+cheapest thing that would firm this up, and it needs no breakout.
+
+Four corner holes do not survive at this size — a 30 mm connector block in a
+35 mm board leaves no corner for a 4.9 mm M2 courtyard — so there are two, on
+the centreline, in the only band where nothing else reaches the edges.
+
+### The fan-in needs both layers, and not for the obvious reason
+
+All six channels land in one 4 × 2 mm cluster at the west end of J10 while
+their headers are spread across the whole width. J10's north row is reachable
+from above; its south row is not reachable from the north at all, for the same
+reason [the far row of J1](#the-one-hard-part-reaching-the-far-row-of-j1) is
+not. So CH2/CH4/CH6 go around the west end and come back in from below.
+
+That detour cannot be done on one layer, and the reason is a genuine
+contradiction rather than congestion:
+
+- Each even channel drops from its header to a west-bound lane. A lane crosses
+  every drop that ends south of it, so the channel travelling furthest west
+  must run **southernmost**.
+- But each channel then turns south down the west margin, and that same
+  ordering puts every lane straight across the *descents* of the channels north
+  of it.
+
+Both cannot hold at once. So the three descents run on F.Cu and everything
+either side of them on B.Cu, with a via at each end — six vias, and they are
+the cheapest thing on the board. `check_placement()` asserts both nestings and
+the via clearances; DRC caught the first two attempts before the assertions
+existed.
+
 ## Still open
 
 **The breakout revision — mostly resolved.** Cycfi's published *sources* are
@@ -336,6 +471,28 @@ Two consequences, and only the second one costs anything:
 settle it: overall width and height, hole diameter, and hole centres in both
 axes. If they differ, `design.MOUNTING_PATTERN` is the one block that changes
 and the layout re-derives from it.
+
+### Does v2.6 present its jack the same way?
+
+This blocks ordering the **direct** variant, and nothing else does.
+
+That board presents `J10` and `J11` as two 2.00 mm 2×5 headers because that is
+how v2.5 does it, and it rests entirely on the instrument's existing jack loom
+plugging into them unmodified. v2.6 is a physical redesign and this has not
+been confirmed. The v2.6.1 datasheet's jack diagram carries the same label set
+— CH1–CH15, three grounds, two VIN — so the jack's *content* did not change,
+but the connector and the pin ordering have only been read off a v2.5 file.
+
+Two things to check with a v2.6 in hand:
+
+1. **Are there two 2.00 mm 2×5 headers for the jack?** If not, `J10`/`J11` are
+   the wrong parts and the variant needs re-thinking.
+2. **The channel-to-position mapping**, against
+   [`cycfi-sources.md`](cycfi-sources.md). `design.JACK_J10` and `JACK_J11` are
+   the one block that changes; `check_against_cycfi()` re-derives the rest.
+
+And one that needs no breakout at all: **the A4B-3S-2C housing width**, which
+sets the direct board's minimum width on its own.
 
 **What voltage the capsules will see.** On v2.5 the Nu Multi input's supply
 pin is a net called V+, fed from `J14`, a jumper silkscreened `PWR SELECT`

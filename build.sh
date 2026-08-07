@@ -35,8 +35,16 @@ if [ -z "$KICAD_PY" ]; then
     exit 1
 fi
 
-PROJECT=cycfi-nu-hub/cycfi-nu-hub
+# Which board to build. Two exist and they share every generator; see
+# design.VARIANT for what differs. Everything downstream -- the project
+# directory, the fab filenames, the ORDER.md verify.py checks -- follows from
+# the name design.py derives, so it is asked for rather than assumed here.
+export CYCFI_HUB_VARIANT="${1:-${CYCFI_HUB_VARIANT:-breakout}}"
+NAME="$("$PY" -c 'import design; print(design.PROJECT)')"
+ORDER="$("$PY" -c 'import design; print("ORDER.md" if design.VARIANT == "breakout" else f"ORDER-{design.VARIANT}.md")')"
+PROJECT="$NAME/$NAME"
 mkdir -p build fab
+echo "== $CYCFI_HUB_VARIANT ($NAME) =="
 
 echo "== schematic and project =="
 "$PY" gen_sch.py
@@ -64,7 +72,7 @@ echo "== checking the drawing and the board against design.py =="
 "$PY" verify.py
 
 echo "== ERC / DRC =="
-"$KICAD_CLI" sch erc --severity-error --severity-warning -o build/erc.rpt "$PROJECT.kicad_sch" | tail -1
+"$KICAD_CLI" sch erc --severity-error --severity-warning -o build/$NAME-erc.rpt "$PROJECT.kicad_sch" | tail -1
 # Warnings as well as errors, and the fab gate counts both. Asking only for
 # errors hid twenty-seven violations of this project's own rules: every
 # silkscreen legend was under the minimum text height written into the
@@ -72,16 +80,16 @@ echo "== ERC / DRC =="
 # None of it would have scrapped a board, and all of it would have reached
 # one. If a warning is ever genuinely acceptable, exclude it explicitly
 # rather than by lowering what the build looks at.
-"$KICAD_CLI" pcb drc --severity-error --severity-warning -o build/drc.rpt "$PROJECT.kicad_pcb" | tail -2
-DRC_ERRORS=$(grep -cE '^\[' build/drc.rpt || true)
+"$KICAD_CLI" pcb drc --severity-error --severity-warning -o build/$NAME-drc.rpt "$PROJECT.kicad_pcb" | tail -2
+DRC_ERRORS=$(grep -cE '^\[' build/$NAME-drc.rpt || true)
 
 echo "== documentation outputs =="
-"$KICAD_CLI" sch export pdf -o fab/cycfi-nu-hub-schematic.pdf "$PROJECT.kicad_sch" >/dev/null
+"$KICAD_CLI" sch export pdf -o fab/$NAME-schematic.pdf "$PROJECT.kicad_sch" >/dev/null
 "$KICAD_CLI" sch export bom --group-by Value,Footprint \
     --fields 'Reference,Value,Footprint,${QUANTITY},Description' \
-    -o fab/cycfi-nu-hub-bom.csv "$PROJECT.kicad_sch" >/dev/null
+    -o fab/$NAME-bom.csv "$PROJECT.kicad_sch" >/dev/null
 "$KICAD_CLI" pcb export pos --format csv --units mm \
-    -o fab/cycfi-nu-hub-pos.csv "$PROJECT.kicad_pcb" >/dev/null
+    -o fab/$NAME-pos.csv "$PROJECT.kicad_pcb" >/dev/null
 # The layout asset a reviewer can actually comment on. One page per copper
 # layer, each carrying the board outline and the reference designators, so
 # every page is a drawing you can read on its own.
@@ -97,14 +105,14 @@ echo "== documentation outputs =="
     --theme "KiCad Classic" --bg-color "#FFFFFF" \
     --layers F.Cu,B.Cu \
     --common-layers Edge.Cuts,F.SilkS --scale 0 \
-    -o fab/cycfi-nu-hub-layout.pdf "$PROJECT.kicad_pcb" >/dev/null
+    -o fab/$NAME-layout.pdf "$PROJECT.kicad_pcb" >/dev/null
 # Decorative, and the one artefact that reads at a glance to someone who has
 # not opened a CAD tool. Deliberately not --quality high: the raytracer
 # samples stochastically, so it returns a different file byte for byte on
 # every run even from an identical board. `basic` is reproducible to the byte.
 "$KICAD_CLI" pcb render --side top --quality basic --background opaque \
     --width 2400 --height 1200 \
-    -o fab/cycfi-nu-hub-top.png "$PROJECT.kicad_pcb" >/dev/null
+    -o fab/$NAME-top.png "$PROJECT.kicad_pcb" >/dev/null
 
 # The set a fab actually gets: copper, mask, silk, outline, drill -- and
 # nothing else. A blanket export also writes Fab, Courtyard and User layers,
@@ -112,21 +120,21 @@ echo "== documentation outputs =="
 # instead of Edge.Cuts the board comes back the wrong shape.
 echo "== fab package =="
 if [ "$DRC_ERRORS" -ne 0 ]; then
-    rm -f fab/cycfi-nu-hub-pcbway.zip
-    echo "SKIPPED: $DRC_ERRORS DRC error(s) outstanding -- see build/drc.rpt."
+    rm -f fab/$NAME-pcbway.zip
+    echo "SKIPPED: $DRC_ERRORS DRC error(s) outstanding -- see build/$NAME-drc.rpt."
     echo "No fabrication package is written while the board has known errors."
     exit 0
 fi
-rm -rf fab/pcbway
+rm -rf "fab/$NAME-pcbway"
 "$KICAD_CLI" pcb export gerbers \
     --layers F.Cu,B.Cu,F.Mask,B.Mask,F.SilkS,B.SilkS,Edge.Cuts \
-    -o fab/pcbway/ "$PROJECT.kicad_pcb" >/dev/null
+    -o "fab/$NAME-pcbway/" "$PROJECT.kicad_pcb" >/dev/null
 # Omitting --excellon-separate-th gives one combined PTH/NPTH file, which is
 # what fabs expect; it is a bare flag, not a key=value. The four mounting
 # holes are marked unplated inside it, which is the thing ORDER.md asks the
 # fab not to override.
 "$KICAD_CLI" pcb export drill --format excellon \
-    -o fab/pcbway/ "$PROJECT.kicad_pcb" >/dev/null
-cp fab/ORDER.md fab/pcbway/
-(cd fab/pcbway && zip -q -r ../cycfi-nu-hub-pcbway.zip .)
-echo "wrote fab/cycfi-nu-hub-pcbway.zip -- upload this, and see fab/ORDER.md"
+    -o "fab/$NAME-pcbway/" "$PROJECT.kicad_pcb" >/dev/null
+cp "fab/$ORDER" "fab/$NAME-pcbway/"
+(cd "fab/$NAME-pcbway" && zip -q -r "../$NAME-pcbway.zip" .)
+echo "wrote fab/$NAME-pcbway.zip -- upload this, and see fab/$ORDER"
